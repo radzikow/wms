@@ -1,0 +1,110 @@
+// Login Page
+.login-wrapper, .register-wrapper {
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-form, .register-form {
+    background-color: $bg-white;
+    margin-bottom: 50px;
+    text-align: center;
+    box-shadow: $box-shadow-gentle;
+    padding: 25px;
+    max-width: 450px;
+    width: 90%;
+
+    @include sm-devices {
+      width: 80%;
+    }
+
+    @include md-devices {
+      width: 70%;
+    }
+
+    .title {
+      width: 100%;
+      margin: 5px auto 25px auto;
+      color: $text-4;
+      text-transform: uppercase;
+      font-size: 1.5em;
+    }
+
+    .underline {
+      height: 1px;
+      width: 100%;
+      background-color: $text-1;
+    }
+
+    .form-item {
+      label {
+        width: 100%;
+        text-align: left;
+        font-size: 1em;
+        margin-top: 15px;
+        color: $text-dark;
+        margin-bottom: 0 !important;
+      }
+
+      input {
+        width: 100%;
+        background-color: $bg-white;
+        border: none;
+        border-bottom: 1px solid $text-1;
+        padding: 7px 0px;
+        outline: none !important;
+
+        &:focus {
+          border: none;
+          border-bottom: 2px solid $primary;
+        }
+      }
+
+      .form-control {
+        border-radius: 0px !important;
+      }
+    }
+
+    .check {
+      input {
+        width: fit-content;
+        display: inline-block;
+      }
+
+      label {
+        width: fit-content;
+        display: inline-block;
+      }
+    }
+
+    .form-button {
+      margin-top: 20px;
+
+      button {
+        display: inline-block;
+        text-decoration: none;
+        color: $text-white;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 25px;
+        background-color: $primary;
+        box-shadow: $box-shadow-gentle;
+        min-width: 120px;
+        font-size: 1.2em;
+        padding: 6px 16px;
+      }
+    }
+
+    .test-login {
+      width: 100%;
+
+      p {
+        margin-top: 20px;
+        font-size: .9em;
+        color: $text-4;
+      }
+    }
+  }
+}
+
+

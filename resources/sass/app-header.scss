@@ -1,0 +1,176 @@
+// App Header
+.app-header-nav {
+  box-shadow: $box-shadow;
+  position: fixed;
+  width: 100%;
+  z-index: 90;
+
+  .app-header {
+    .app-header-wrapper {
+      height: 70px;
+      background: #5ba1e2;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 28px;
+      padding-right: 28px;
+
+      .app-header-burger {
+        margin-left: 0;
+        margin-right: auto;
+        width: 35%;
+
+        @include md-devices {
+          display: none;
+          width: 20%;
+        }
+
+        img {
+          display: block;
+          margin: auto;
+          margin-left: 0;
+          cursor: pointer;
+        }
+      }
+
+      .app-header-logo {
+        margin: auto;
+
+        @include md-devices {
+          margin-left: 0;
+          margin-right: auto;
+        }
+
+        a {
+          font-size: 1.3em;
+          color: $text-white;
+          text-decoration: none;
+        }
+
+        .logo-long {
+          display: none;
+
+          @include md-devices {
+            display: block;
+          }
+        }
+
+        .logo-short {
+          @include md-devices {
+            display: none;
+          }
+        }
+      }
+
+      .app-header-user {
+        margin-right: 0;
+        color: $text-white;
+        margin-left: auto;
+        width: 35%;
+        text-align: right;
+
+        div {
+          margin-left: auto;
+          width: fit-content;
+          cursor: pointer;
+          padding: 9px;
+          padding-right: 0;
+
+          &:hover {
+            .menu-options-div {
+              display: block !important;
+            }
+          }
+
+          p {
+            display: none;
+            margin: 0;
+            margin-right: 9px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+
+            @include md-devices {
+              display: inline-block;
+            }
+          }
+
+          img {
+            display: inline-block;
+          }
+
+          .user {
+            display: inline-block;
+            width: 20px;
+
+            @include md-devices {
+              display: none;
+            }
+          }
+
+          .dropdown {
+            display: none;
+
+            @include md-devices {
+              display: inline-block;
+            }
+          }
+
+          .menu-options-div {
+            background-color: $bg-white;
+            box-shadow: $box-shadow-gentle;
+            font-size: 1em;
+            display: none;
+            position: absolute;
+            top: 51px;
+            right: 28px;
+            min-width: 110px;
+
+            ul {
+              list-style-type: none;
+              padding-left: 0;
+              margin-bottom: 0;
+
+              a {
+                color: $text-4;
+                text-decoration: none;
+                padding: 0 !important;
+
+                &:last-child {
+                  li {
+                    span {
+                      color: $bg-red;
+                    }
+                  }
+                }
+
+                &:hover > li {
+                  background-color: #f8f9fa;
+                }
+
+                li {
+                  min-width: 10;
+                  padding: 9px 14px !important;
+                  opacity: 1;
+                  border-bottom: 1px solid rgb(223, 223, 223);
+                  display: flex;
+                  align-items: center;
+
+                  span {
+                    margin-left: 7px;
+                    display: inline-block;
+                    font-size: 1.05em;
+                  }
+
+                  img {
+                    display: inline-block;
+                    width: 5px;
+                    height: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

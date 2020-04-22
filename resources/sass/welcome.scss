@@ -1,0 +1,88 @@
+// Welcome Header
+.welcome-header-nav {
+  box-shadow: $box-shadow;
+
+  .welcome-header {
+    .welcome-header-wrapper {
+      height: 70px;
+      background: #5ba1e2;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 28px;
+      padding-right: 28px;
+
+      .welcome-header-burger {
+        margin-left: 0;
+        margin-right: auto;
+        width: 35%;
+
+        @include md-devices {
+          display: none;
+          width: 20%;
+        }
+
+        img {
+          display: block;
+          margin: auto;
+          margin-left: 0;
+        }
+      }
+
+      .welcome-header-logo {
+        margin: auto;
+
+        @include md-devices {
+          margin-left: 0;
+          margin-right: auto;
+        }
+
+        a {
+          font-size: 1.3em;
+          color: $text-white;
+          text-decoration: none;
+        }
+
+        .logo-long {
+          display: none;
+
+          @include md-devices {
+            display: block;
+          }
+        }
+
+        .logo-short {
+          @include md-devices {
+            display: none;
+          }
+        }
+      }
+
+      .welcome-header-links {
+        margin-right: 0;
+        color: $text-white;
+        margin-left: auto;
+        width: 35%;
+        text-align: right;
+
+        @include md-devices {
+          width: 20%;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          font-size: 1.2em;
+          margin-left: 17px;
+
+          img {
+            display: inline-block;
+            margin-left: 6px;
+            max-width: 18px;
+            height: auto;
+            color: $text-white;
+          }
+        }
+      }
+    }
+  }
+}

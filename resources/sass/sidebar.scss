@@ -1,0 +1,225 @@
+// Sidebar / Main Navigation
+.sidebar-section {
+  width: auto;
+  height: auto;
+  z-index: 90;
+
+  .sidebar-wrapper {
+    background: $bg-white;
+    box-shadow: $box-shadow-gentle;
+    position: fixed;
+    top: 70px;
+    height: 100vh;
+    left: -250px;
+    transition: all 0.2s ease-out;
+    width: 250px;
+    overflow-y: scroll;
+    padding-bottom: 90px;
+
+    /* width */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include md-devices {
+      left: -183px;
+    }
+
+    .sidebar-burger {
+      height: auto;
+      width: 100%;
+      margin: auto;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: $bg-gray;
+      cursor: pointer;
+      width: 250px;
+      border: none;
+    outline: none;
+
+      @include md-devices {
+        display: flex;
+      }
+
+      .sidebar-burger-name {
+        display: inline-block;
+        margin: 0;
+        font-size: 1em;
+        text-transform: uppercase;
+      }
+
+      .burger-image {
+        display: inline-block;
+        width: 29px;
+      }
+    }
+
+    .sidebar-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      width: 250px;
+
+      .sidebar-list-item {
+        font-size: 1.1em;
+        border-bottom: 1px solid $text-1;
+        // padding: 13px 20px;
+        width: 100% !important;
+        height: 51px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:first-child {
+          border-top: 1px solid $text-1;
+        }
+
+        &:last-child {
+          .sidebar-list-name {
+            color: $bg-red;
+          }
+        }
+
+        &:hover {
+          background-color: $bg-gray;
+        }
+
+        .disabled-link {
+          opacity: .4 !important;
+          pointer-events: none !important;
+          cursor: default !important;
+        }
+
+        .sidebar-list-link {
+          height: auto;
+          color: inherit;
+          text-decoration: none;
+          min-width: 29px;
+          // display: block;
+          width: 100%;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          justify-content: left;
+          padding: 9px 20px;
+
+          @include md-devices {
+            display: block;
+            text-align: right;
+          }
+
+          img {
+            display: inline-block;
+            margin-right: 4px;
+            width: 18px;
+            height: 18px;
+          }
+
+          .sidebar-list-name {
+            margin: 0;
+            margin-left: 12px;
+            display: inline-block;
+
+            @include md-devices {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .content-subpages {
+        background-color: $bg-gray !important;
+        height: 41px !important;
+        display: none;
+        transition: all .3s;
+
+        a {
+          padding-left: 24px !important;
+          font-size: 0.93em !important;
+          padding: 9px 20px;
+
+
+          img {
+            width: 10px !important;
+            height: 10px !important;
+          }
+
+          p {
+            margin-left: 5px !important;
+          }
+        }
+      }
+
+      .blog-subpages {
+        background-color: $bg-gray !important;
+        height: 41px !important;
+        display: none;
+        transition: all .3s;
+
+        a {
+          padding-left: 24px !important;
+          font-size: 0.93em !important;
+          padding: 9px 20px;
+
+
+          img {
+            width: 10px !important;
+            height: 10px !important;
+          }
+
+          p {
+            margin-left: 5px !important;
+          }
+        }
+      }
+    }
+
+    .sidebar-footer {
+      width: 100%;
+      opacity: 1;
+
+      @include md-devices {
+        opacity: 0;
+      }
+
+      span {
+        display: block;
+        text-align: center;
+        font-size: 0.8em;
+        color: $text-3;
+
+        &:first-child {
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+.toggle-sidebar-list-name {
+  display: inline-block !important;
+}
+
+.toggle-sidebar-wrapper {
+  left: 0 !important;
+}
+
+.toggle-sidebar-links {
+  display: flex !important;
+  justify-content: right !important;
+}
+
+.toggle-sidebar-footer {
+  opacity: 1 !important;
+}
+
+.toggle-content-subpages {
+  display: block !important;
+}
+
+.toggle-blog-subpages {
+  display: block !important;
+}

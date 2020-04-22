@@ -1,0 +1,248 @@
+/* --------------------------*/
+// Body
+/* --------------------------*/
+$body-bg: #f8fafc;
+
+/* --------------------------*/
+// Typography
+/* --------------------------*/
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+/* --------------------------*/
+// Padding and margin
+/* --------------------------*/
+
+$box-shadow: 1px 1px 6px 1px hsla(0, 0%, 80%, 0.7);
+$box-shadow-gentle: 1px 1px 5px 0px hsla(0, 0%, 80%, 0.7);
+
+/* --------------------------*/
+// Colors
+/* --------------------------*/
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$primary: #469dc9;
+$primary-light: #82c9ed;
+
+$bg-white: #FFFFFF;
+$bg-gray: #F8F8F8;
+$bg-red: #DF5757;
+
+$text-1: #E6E6E6;
+$text-2: #CBCBCB;
+$text-3: #7C7C7C;
+$text-4: #585757;
+$text-white: white;
+$text-dark: #2E2E2E;
+
+$text-dark: #2a2a2a;
+$text-light: #585757;
+
+$danger: #DF5757;
+$success: #5AA652;
+$warning: #EBB043;
+
+$red-dark: #D62657;
+$red-light: #E33666;
+$green-dark: #5AA652;
+$green-light: #68B760;
+$yellow-dark: #DAA950;
+$yellow-light: #EBB043;
+$blue-dark: #469dc9;
+$blue-light: #4cb0e2;
+
+/* --------------------------*/
+// Mixins
+/* --------------------------*/
+@mixin blue-button {
+  // background-color: $primary;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  background: rgb(70, 157, 201);
+  background: -moz-linear-gradient(
+    51deg,
+    rgba(70, 157, 201, 1) 13%,
+    rgba(120, 186, 219, 0.8) 42%,
+    rgba(120, 186, 219, 1) 67%,
+    rgba(70, 157, 201, 1) 91%
+  );
+  background: -webkit-linear-gradient(
+    51deg,
+    rgba(70, 157, 201, 1) 13%,
+    rgba(120, 186, 219, 1) 42%,
+    rgba(120, 186, 219, 1) 67%,
+    rgba(70, 157, 201, 1) 91%
+  );
+  background: linear-gradient(
+    51deg,
+    rgba(70, 157, 201, 1) 13%,
+    rgba(120, 186, 219, 1) 42%,
+    rgba(120, 186, 219, 1) 67%,
+    rgba(70, 157, 201, 1) 91%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#469dc9",endColorstr="#469dc9",GradientType=1);
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgb(120, 186, 219);
+    background: -moz-linear-gradient(
+      51deg,
+      rgba(120, 186, 219) 13%,
+      rgba(70, 157, 201, 1) 42%,
+      rgba(70, 157, 201, 1) 67%,
+      rgba(120, 186, 219) 91%
+    );
+    background: -webkit-linear-gradient(
+      51deg,
+      rgba(120, 186, 219) 13%,
+      rgba(70, 157, 201, 1) 42%,
+      rgba(70, 157, 201, 1) 67%,
+      rgba(120, 186, 219) 91%
+    );
+    background: linear-gradient(
+      51deg,
+      rgba(120, 186, 219) 13%,
+      rgba(70, 157, 201, 1) 42%,
+      rgba(70, 157, 201, 1) 67%,
+      rgba(120, 186, 219) 91%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#469dc9",endColorstr="#469dc9",GradientType=1);
+  }
+}
+
+@mixin blue-gradient-bg {
+  background: rgb(120, 186, 219);
+  background: -moz-linear-gradient(
+    51deg,
+    rgba(120, 186, 219) 13%,
+    rgba(70, 157, 201, 1) 42%,
+    rgba(70, 157, 201, 1) 67%,
+    rgba(120, 186, 219) 91%
+  );
+  background: -webkit-linear-gradient(
+    51deg,
+    rgba(120, 186, 219) 13%,
+    rgba(70, 157, 201, 1) 42%,
+    rgba(70, 157, 201, 1) 67%,
+    rgba(120, 186, 219) 91%
+  );
+  background: linear-gradient(
+    51deg,
+    rgba(120, 186, 219) 13%,
+    rgba(70, 157, 201, 1) 42%,
+    rgba(70, 157, 201, 1) 67%,
+    rgba(120, 186, 219) 91%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#469dc9",endColorstr="#469dc9",GradientType=1);
+}
+
+@mixin white-button {
+  color: $text-dark;
+  border: none;
+  border-radius: 25px;
+  background: $bg-white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@mixin section-wrapper {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  @include sm-devices {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  @include md-devices {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+}
+
+@mixin title-wrapper {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include sm-devices {
+    margin-top: 0;
+  }
+
+  .section-title {
+    font-size: 2.3em;
+    color: $text-dark;
+    font-weight: 500;
+    font-family: "Ubuntu", sans-serif;
+
+    @include sm-devices() {
+      font-size: 2.4em;
+    }
+
+    @include md-devices() {
+      font-size: 2.5em;
+
+    }
+  }
+
+  .section-additional-text {
+    font-size: 1.2em;
+    color: $text-light;
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+
+    @include md-devices {
+      width: 80%;
+    }
+
+    @include lg-devices {
+      width: 60%;
+    }
+  }
+}
+
+/* --------------------------*/
+/* Breakpoints */
+/* --------------------------*/
+$xs-devices: 350px;
+$sm-devices: 540px;
+$md-devices: 768px;
+$lg-devices: 992px;
+$xl-devices: 1200px;
+
+@mixin xs-devices {
+  @media (min-width: #{$xs-devices}) {
+    @content;
+  }
+}
+
+@mixin sm-devices {
+  @media (min-width: #{$sm-devices}) {
+    @content;
+  }
+}
+
+@mixin md-devices {
+  @media (min-width: #{$md-devices}) {
+    @content;
+  }
+}
+
+@mixin lg-devices {
+  @media (min-width: #{$lg-devices}) {
+    @content;
+  }
+}
+
+@mixin xl-devices {
+  @media (min-width: #{$xl-devices}) {
+    @content;
+  }
+}

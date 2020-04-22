@@ -1,0 +1,47 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,600,700&display=swap&subset=latin-ext");
+
+// Fonts Awesome
+// @import "node_modules/font-awesome/scss/font-awesome.scss";
+
+// General Styles
+* {
+  font-family: "Lato", sans-serif;
+  // font-family: 'Open Sans', sans-serif;
+}
+
+main {
+  max-width: 1530px;
+  display: flex !important;
+  min-height: 100vh;
+}
+
+// Variables
+@import "_variables";
+
+// Welcome Layout
+@import "welcome";
+
+// Welcome Page
+@import "home";
+
+// Login Page
+@import "login";
+
+// App Layout
+@import "app";
+
+// App Header Page
+@import "app-header";
+
+// Sidebar Page
+@import "sidebar";
+
+// Dashboard Page
+@import "dashboard";
+
+// Dashboard Content
+@import "dashboard-content";
+
+// Alert
+@import "alert";

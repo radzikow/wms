@@ -1,0 +1,149 @@
+// Profile Section
+.profile-section {
+  width: 100%;
+  min-height: calc(100% - 70px);
+  padding: 95px 30px 25px 30px;
+  overflow: hidden;
+
+  @include md-devices {
+    width: 100%;
+    padding-left: 95px;
+  }
+
+  // Title
+  .profile-title-wrapper {
+    margin: 0;
+
+    .profile-title {
+      font-size: 1.5em;
+      text-transform: uppercase;
+      margin: 0;
+      font-size: 1.2em;
+      color: $text-4;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+
+  // Profile
+  .profile-wrapper {
+    color: $text-4;
+    background-color: $bg-white;
+    box-shadow: $box-shadow-gentle;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+    .profile-title {
+      padding: 15px;
+      border-bottom: 1px solid $text-1;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        margin: 0;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 1.3em;
+      }
+    }
+
+    .profile-content {
+      padding: 15px;
+
+      .profile-select {
+        width: 100%;
+        border-bottom: 1px solid $text-1;
+        margin-bottom: 20px;
+
+        .update-profile-tab {
+          display: inline-block;
+          padding: 10px;
+          text-transform: uppercase;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+
+        .change-password-tab {
+          display: inline-block;
+          padding: 10px;
+          text-transform: uppercase;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+
+        .active {
+          color: $primary;
+          font-weight: 600;
+          border-bottom: 2px solid $primary;
+        }
+      }
+
+      .update-profile, .change-password {
+
+        .update-single {
+          display: block;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 12px;
+
+          label {
+            display: inline-block;
+            min-width: 160px;
+            margin-top: 10px;
+            text-align: right;
+            margin-right: 10px;
+            font-weight: 600;
+          }
+
+          input {
+            display: inline-block;
+            padding: 4px;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid $text-1;
+            outline: none;
+
+            &:focus {
+              border-bottom: 2px solid $primary;
+            }
+          }
+        }
+
+        .update-btn {
+          width: 100%;
+          padding-top: 15px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+
+          a {
+            text-decoration: none;
+            color: $text-4;
+            font-size: 1em;
+            text-align: center;
+            padding: 6px 18px;
+            color: $text-white;
+            background-color: $primary;
+            font-size: 1em;
+          }
+        }
+      }
+
+      .update-profile {
+        // display: none;
+      }
+
+      .change-password {
+        display: none;
+      }
+    }
+  }
+}
