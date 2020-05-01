@@ -20,10 +20,12 @@ class NumbersController extends Controller
   public function index()
   {
     // Get json file from storage
-    $path = public_path('storage/numbers.json');
-    $content = json_decode(file_get_contents($path), true);
+    $path = Storage::disk('public')->get('numbers.json');
+    $content = json_decode($path, true);
 
     $numbers = $content['numbers'];
+
+    // return json_decode(Storage::disk('public')->get('numbers.json'), true);
 
     return view('website-content.numbers.index', ['numbers' => $numbers]);
   }

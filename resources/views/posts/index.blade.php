@@ -50,19 +50,19 @@
               <td>{{ $key + 1 }}</td>
               <td>{{ $post->title }}</td>
               @foreach($users as $user)
-              @if ($user->id === $post->user_id)
+              @if ($user->id == $post->user_id)
               <td>{{ $user->firstname . ' ' . $user->lastname }}</td>
               @endif
               @endforeach
               <td>{{ $post->date }}</td>
               <td>{{ $post->views . '/' . $post->comments }}</td>
               @foreach($topics as $topic)
-              @if ($topic->id === $post->topic_id)
+              @if ($topic->id == $post->topic_id)
               <td>{{ $topic->name }}</td>
               @endif
               @endforeach
               <td><span
-                  class="status {{ $post->status === 1 ? 'published' : 'unpublished' }}">{{ $post->status === 1 ? 'Published' : 'Unpublished' }}</span>
+                  class="status {{ $post->status == 1 ? 'published' : 'unpublished' }}">{{ $post->status == 1 ? 'Published' : 'Unpublished' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/posts/{{ $post->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>

@@ -1,9 +1,6 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans:400,600,700&display=swap&subset=latin-ext");
 
-// Fonts Awesome
-// @import "node_modules/font-awesome/scss/font-awesome.scss";
-
 // General Styles
 * {
   font-family: "Lato", sans-serif;
@@ -45,3 +42,4 @@ main {
 
 // Alert
 @import "alert";
+

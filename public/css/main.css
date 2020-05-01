@@ -49,34 +49,9 @@ main {
   padding-right: 28px;
 }
 
-.welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-burger {
+.welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-logo {
   margin-left: 0;
   margin-right: auto;
-  width: 35%;
-}
-
-@media (min-width: 768px) {
-  .welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-burger {
-    display: none;
-    width: 20%;
-  }
-}
-
-.welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-burger img {
-  display: block;
-  margin: auto;
-  margin-left: 0;
-}
-
-.welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-logo {
-  margin: auto;
-}
-
-@media (min-width: 768px) {
-  .welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-logo {
-    margin-left: 0;
-    margin-right: auto;
-  }
 }
 
 .welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-logo a {
@@ -105,13 +80,13 @@ main {
   margin-right: 0;
   color: white;
   margin-left: auto;
-  width: 35%;
+  width: auto;
   text-align: right;
 }
 
 @media (min-width: 768px) {
   .welcome-header-nav .welcome-header .welcome-header-wrapper .welcome-header-links {
-    width: 20%;
+    width: auto;
   }
 }
 
@@ -268,6 +243,10 @@ main {
   width: 100%;
   background-color: #FFFFFF;
   border: none;
+  border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  -o-border-radius: 0px !important;
   border-bottom: 1px solid #E6E6E6;
   padding: 7px 0px;
   outline: none !important;
@@ -13086,31 +13065,35 @@ a.text-dark:focus {
 }
 
 .alert-success {
-  display: flex;
-  right: 10px;
-  background-color: #5AA652;
+  display: flex !important;
+  right: 10px !important;
+  background-color: #5AA652 !important;
+  color: inherit !important;
 }
 
 .alert-primary {
-  display: flex;
-  right: 10px;
-  background-color: #469dc9;
+  display: flex !important;
+  right: 10px !important;
+  background-color: #469dc9 !important;
+  color: inherit !important;
 }
 
 .alert-warning {
-  display: flex;
-  right: 10px;
-  background-color: #EBB043;
+  display: flex !important;
+  right: 10px !important;
+  background-color: #EBB043 !important;
+  color: inherit !important;
 }
 
 .alert-danger {
-  display: flex;
-  right: 10px;
-  background-color: #DF5757;
+  display: flex !important;
+  right: 10px !important;
+  background-color: #DF5757 !important;
+  color: inherit !important;
 }
 
 .hideAlert {
   right: -260px !important;
-  transition: all 0.2s;
+  transition: all 0.2s !important;
 }
 

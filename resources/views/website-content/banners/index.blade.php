@@ -50,7 +50,7 @@
               <td>{{ $banner->image }}</td>
               <td>{{ $banner->title }}</td>
               <td><span
-                  class="status {{ $banner->status === 1 ? 'published' : 'unpublished' }}">{{ $banner->status === 1 ? 'Published' : 'Unpublished' }}</span>
+                  class="status {{ $banner->status == 1 ? 'published' : 'unpublished' }}">{{ $banner->status == 1 ? 'Published' : 'Unpublished' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/banners/{{ $banner->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}"

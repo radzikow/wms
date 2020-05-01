@@ -3,10 +3,6 @@
   <div class="container-fluid welcome-header">
     <div class="row welcome-header-wrapper">
 
-      <div class="welcome-header-burger">
-        {{-- <img src="{{url("/svg/menu.svg")}}" alt="Menu Burger"> --}}
-      </div>
-
       <div class="welcome-header-logo">
         <a href="{{ url('/') }}" class="logo-long">Website Management System ©</a>
         <a href="{{ url('/') }}" class="logo-short">WMS ©</a>
@@ -16,10 +12,10 @@
 
         @if (Route::has('login'))
         @auth
-        <a href="{{ url('/') }}">Home</a>
+        <a class="header-link-1" href="{{ url('/') }}">Home</a>
         <a href="{{ url('/dashboard') }}">Dashboard</a>
         @else
-        <a href="{{ url('/') }}">Home</a>
+        <a class="header-link-1" href="{{ url('/') }}">Home</a>
         <a href="{{ route('login') }}">Login<img src="{{url("/svg/login.svg")}}" alt="Login"></a>
 
         {{-- @if (Request::is('login'))

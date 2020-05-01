@@ -51,7 +51,7 @@
               <td>{{ $user->email }}</td>
               <td class="{{ $user->role }}">{{ ucfirst($user->role) }}</td>
               <td><span
-                  class="status {{ $user->status === 1 ? 'active' : 'inactive' }}">{{ $user->status === 1 ? 'Active' : 'Inactive' }}</span>
+                  class="status {{ $user->status == 1 ? 'active' : 'inactive' }}">{{ $user->status == 1 ? 'Active' : 'Inactive' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/users/{{ $user->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>

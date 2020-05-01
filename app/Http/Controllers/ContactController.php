@@ -20,8 +20,8 @@ class ContactController extends Controller
   public function index()
   {
     // Get json file from storage
-    $path = public_path('storage/contact.json');
-    $content = json_decode(file_get_contents($path), true);
+    $path = Storage::disk('public')->get('contact.json');
+    $content = json_decode($path, true);
 
     $contactInfo = $content['contact'];
     $socialLinks = $content['social'];

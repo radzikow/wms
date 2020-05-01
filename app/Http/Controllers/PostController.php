@@ -74,10 +74,6 @@ class PostController extends Controller
       $postStatus = 0;
     }
 
-    // $postAuthor = request('postAuthor');
-    // if ($postAuthor === )
-
-
     // Inputs validation
     $validator = Validator::make($request->all(), [
       'postTitle' => 'required|min:10|max:100',
@@ -103,7 +99,7 @@ class PostController extends Controller
       $image = $request->file('postImage');
       $imageExtension = $image->getClientOriginalExtension();
       $newImageName = rand() . '.' . $imageExtension;
-      $destinationPath = 'blog_images';
+      $destinationPath = '/blog_images';
 
       $path = $image->storeAs($destinationPath, $newImageName);
     }
@@ -170,7 +166,7 @@ class PostController extends Controller
   {
     // Modify status value
     $postStatus = request('postStatus');
-    if ($postStatus === 'on') {
+    if ($postStatus == 'on') {
       $postStatus = 1;
     } else {
       $postStatus = 0;

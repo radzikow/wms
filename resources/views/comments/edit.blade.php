@@ -84,9 +84,9 @@
             <label for="commentStatus">Comment status</label>
             <select name="commentStatus" id="commentStatus">
               <option value="" disabled hidden>Choose status</option>
-              <option value="2" {{ $comment->status === 2 ? 'selected' : '' }}>Waiting</option>
-              <option value="1" {{ $comment->status === 1 ? 'selected' : '' }}>Accepted</option>
-              <option value="0" {{ $comment->status === 0 ? 'selected' : '' }}>Rejected</option>
+              <option value="2" {{ $comment->status == 2 ? 'selected' : '' }}>Waiting</option>
+              <option value="1" {{ $comment->status == 1 ? 'selected' : '' }}>Accepted</option>
+              <option value="0" {{ $comment->status == 0 ? 'selected' : '' }}>Rejected</option>
             </select>
           </div>
 

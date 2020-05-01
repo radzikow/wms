@@ -52,7 +52,7 @@
               <td>{{ $project->company }}</td>
               <td>{{ $project->btn_link }}</td>
               <td><span
-                  class="status {{ $project->status === 1 ? 'published' : 'unpublished' }}">{{ $project->status === 1 ? 'Published' : 'Unpublished' }}</span>
+                  class="status {{ $project->status == 1 ? 'published' : 'unpublished' }}">{{ $project->status == 1 ? 'Published' : 'Unpublished' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/projects/{{ $project->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}"

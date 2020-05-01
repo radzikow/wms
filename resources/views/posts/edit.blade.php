@@ -100,7 +100,7 @@
           {{-- image preview --}}
           <div class="form-item">
             <label for="postPrevImage">Old image preview</label>
-            <img class="image-preview" src="{{ asset('storage/blog_images/'.$post->image) }}" alt="News Image">
+            <img class="image-preview" src="{{ asset('storage/blog_images/'.$post->image) }}" alt="Post Image">
             <input type="hidden" name="postPrevImage" value="{{ $post->image }}">
           </div>
 
@@ -110,16 +110,16 @@
             <select class="{{ $errors->has('postAuthor') ? 'has-error' :'' }}" name="postAuthor" id="postAuthor">
               <option value="" disabled hidden>Choose author</option>
               @foreach($users as $user)
-              @if (old('postAuthor'))
-              <option value="{{ $user->id }}" {{
-          old('postAuthor') == $user->id ? 'selected' :'' }}>
-                {{ $user->firstname . ' ' . $user->lastname }}
-              </option>
-              @else
-              <option value="{{ $user->id }}" {{ $post->user_id === $user->id ? 'selected' :'' }}>
-                {{ $user->firstname . ' ' . $user->lastname }}
-              </option>
-              @endif
+                @if (old('postAuthor'))
+                <option value="{{ $user->id }}" {{
+            old('postAuthor') == $user->id ? 'selected' :'' }}>
+                  {{ $user->firstname . ' ' . $user->lastname }}
+                </option>
+                @else
+                <option value="{{ $user->id }}" {{ $post->user_id == $user->id ? 'selected' :'' }}>
+                  {{ $user->firstname . ' ' . $user->lastname }}
+                </option>
+                @endif
               @endforeach
             </select>
           </div>
@@ -134,6 +134,7 @@
           {{-- status --}}
           <div class="form-item">
             <label for="postStatus">Publish post?</label>
+
             @if (old('postStatus'))
 
             @if ((old('postStatus') == 'on') || (old('postStatus') == 1))
@@ -146,6 +147,7 @@
             <input class="inputStatus" name="postStatus" id="postStatus" type="checkbox"
               {{ $post->status == 1 ? 'checked' : ''}}>
             @endif
+
           </div>
 
           {{-- id --}}

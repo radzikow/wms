@@ -59,14 +59,16 @@ class LoginController extends Controller
 
     if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => $status], $remember)) {
       // Authentication passed...
-
-      Session::flash('alert-message', 'Subscriber logged out successfully!');
+      Session::flash('alert-message', 'You logged in successfully!');
       Session::flash('alert-class', 'alert-primary');
 
       return redirect()->intended('/dashboard');
     } else {
       // No passed...
-      return redirect()->intended('/home');
+      Session::flash('alert-message', 'Invalid e-mail or password. Please try again!');
+      Session::flash('alert-class', 'alert-primary');
+
+      return redirect()->intended('/login');
     }
   }
 
@@ -74,7 +76,7 @@ class LoginController extends Controller
   {
     Auth::logout();
 
-    Session::flash('alert-message', 'Subscriber logged out successfully!');
+    Session::flash('alert-message', 'You logged out successfully!');
     Session::flash('alert-class', 'alert-primary');
 
     return redirect('/login');

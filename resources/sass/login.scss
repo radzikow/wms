@@ -1,11 +1,13 @@
 // Login Page
-.login-wrapper, .register-wrapper {
+.login-wrapper,
+.register-wrapper {
   height: calc(100vh - 70px);
   display: flex;
   justify-content: center;
   align-items: center;
 
-  .login-form, .register-form {
+  .login-form,
+  .register-form {
     background-color: $bg-white;
     margin-bottom: 50px;
     text-align: center;
@@ -50,6 +52,10 @@
         width: 100%;
         background-color: $bg-white;
         border: none;
+        border-radius: 0px !important;
+        -webkit-border-radius: 0px !important;
+        -moz-border-radius: 0px !important;
+        -o-border-radius: 0px !important;
         border-bottom: 1px solid $text-1;
         padding: 7px 0px;
         outline: none !important;
@@ -100,11 +106,9 @@
 
       p {
         margin-top: 20px;
-        font-size: .9em;
+        font-size: 0.9em;
         color: $text-4;
       }
     }
   }
 }
-
-

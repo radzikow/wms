@@ -47,7 +47,7 @@ $websiteContent = Setting::where('nesting', 'Website Content')->get();
 
       @foreach($websiteContent as $key => $value)
       <div class="sidebar-list-item content-subpages">
-        <a class="sidebar-list-link {{ $value->status === 0 ? 'disabled-link' : '' }}"
+        <a class="sidebar-list-link {{ $value->status == 0 ? 'disabled-link' : '' }}"
           href="{{ url('/dashboard' . '/' . $value->url) }}">
           <img src="{{ asset("/svg/angle-right.svg") }}" alt="{{ $value->name }}">
           <p class="sidebar-list-name">{{ $value->name }}</p>
@@ -65,7 +65,7 @@ $websiteContent = Setting::where('nesting', 'Website Content')->get();
 
       @foreach($blog as $key => $value)
       <div class="sidebar-list-item blog-subpages">
-        <a class="sidebar-list-link {{ $value->status === 0 ? 'disabled-link' : '' }}"
+        <a class="sidebar-list-link {{ $value->status == 0 ? 'disabled-link' : '' }}"
           href="{{ url('/dashboard' . '/' . $value->url) }}">
           <img src="{{ asset("/svg/angle-right.svg") }}" alt="{{ $value->name }}">
           <p class="sidebar-list-name">{{ $value->name }}</p>
@@ -77,7 +77,7 @@ $websiteContent = Setting::where('nesting', 'Website Content')->get();
 
       @foreach($sidebar as $key => $value)
       <div class="sidebar-list-item sidebar-list-item">
-        <a class="sidebar-list-link {{ $value->status === 0 ? 'disabled-link' : '' }}"
+        <a class="sidebar-list-link {{ $value->status == 0 ? 'disabled-link' : '' }}"
           href="{{ url('/dashboard' . '/' . $value->url) }}">
 
           <img src="{{ asset("/svg" . "/" . $value->icon . ".svg") }}" alt="{{ $value->name }}">

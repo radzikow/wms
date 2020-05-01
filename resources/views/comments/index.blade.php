@@ -49,16 +49,16 @@
               <td>{{ $key + 1 }}</td>
               <td>{{ $comment->nickname }}</td>
               @foreach($posts as $post)
-              @if ($post->id === $comment->post_id)
+              @if ($post->id == $comment->post_id)
               <td>{{ $post->title }}</td>
               @endif
               @endforeach
               <td>{{ $comment->text }}</td>
               <td>{{ date('Y-m-d', strtotime($comment->added_at)) }}</td>
               <td>
-                @if ($comment->status === 0)
+                @if ($comment->status == 0)
                 <span class="status rejected">Rejected</span>
-                @elseif($comment->status === 1)
+                @elseif($comment->status == 1)
                 <span class="status accepted">Accepted</span>
                 @else
                 <span class="status waiting">Waiting</span>

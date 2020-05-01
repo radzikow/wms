@@ -103,15 +103,15 @@
             <label for="userStatus">Active user?</label>
             @if (old('userStatus'))
 
-            @if ((old('userStatus') == 'on') || (old('userStatus') == 1))
-            <input class="inputStatus" name="userStatus" id="userStatus" type="checkbox" checked>
-            @else
-            <input class="inputStatus" name="userStatus" id="userStatus" type="checkbox">
-            @endif
+              @if ((old('userStatus') == 'on') || (old('userStatus') == 1))
+              <input class="inputStatus" name="userStatus" id="userStatus" type="checkbox" checked>
+              @else
+              <input class="inputStatus" name="userStatus" id="userStatus" type="checkbox">
+              @endif
 
             @else
             <input class="inputStatus" name="userStatus" id="userStatus" type="checkbox"
-              {{ $oneNews->status == 1 ? 'checked' : ''}}>
+              {{ $user->status == 1 ? 'checked' : ''}}>
             @endif
           </div>
 

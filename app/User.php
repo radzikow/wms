@@ -62,6 +62,7 @@ class User extends Authenticatable implements Auditable
 
   protected $auditExclude = [
     'password',
+    'remember_token'
   ];
 
   // Get posts written by specific user

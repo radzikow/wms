@@ -52,7 +52,7 @@
               <td>{{ $testimonial->name }}</td>
               <td>{{ $testimonial->company }}</td>
               <td><span
-                  class="status {{ $testimonial->status === 1 ? 'published' : 'unpublished' }}">{{ $testimonial->status === 1 ? 'Published' : 'Unpublished' }}</span>
+                  class="status {{ $testimonial->status == 1 ? 'published' : 'unpublished' }}">{{ $testimonial->status == 1 ? 'Published' : 'Unpublished' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/testimonials/{{ $testimonial->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}"

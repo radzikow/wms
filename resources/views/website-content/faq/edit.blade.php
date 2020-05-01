@@ -66,7 +66,7 @@
           {{-- status --}}
           <div class="form-item">
             <label for="faqStatus">Publish faq?</label>
-            @if (old('newsStatus') === 'on')
+            @if (old('newsStatus') == 'on')
             <input name="faqStatus" id="faqStatus" type="checkbox" checked>
             @else
             <input class="inputStatus" name="faqStatus" id="faqStatus" type="checkbox">

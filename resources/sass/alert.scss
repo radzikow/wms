@@ -62,30 +62,34 @@
 }
 
 .alert-success {
-  display: flex;
-  right: 10px;
-  background-color: $success;
+  display: flex !important;
+  right: 10px !important;
+  background-color: $success !important;
+  color: inherit !important;
 }
 
 .alert-primary {
-  display: flex;
-  right: 10px;
-  background-color: $primary;
+  display: flex !important;
+  right: 10px !important;
+  background-color: $primary !important;
+  color: inherit !important;
 }
 
 .alert-warning {
-  display: flex;
-  right: 10px;
-  background-color: $warning;
+  display: flex !important;
+  right: 10px !important;
+  background-color: $warning !important;
+  color: inherit !important;
 }
 
 .alert-danger {
-  display: flex;
-  right: 10px;
-  background-color: $danger;
+  display: flex !important;
+  right: 10px !important;
+  background-color: $danger !important;
+  color: inherit !important;
 }
 
 .hideAlert {
   right: -260px !important;
-  transition: all .2s;
+  transition: all .2s !important;
 }

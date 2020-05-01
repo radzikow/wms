@@ -89,7 +89,7 @@
             <td>{{ $post->views }}</td>
             <td>{{ $post->comments }}</td>
             <td><span
-                class="post-status {{ $post->status === 1 ? 'published' : 'unpublished' }}">{{ $post->status === 1 ? 'Published' : 'Unpublished' }}</span>
+                class="post-status {{ $post->status == 1 ? 'published' : 'unpublished' }}">{{ $post->status == 1 ? 'Published' : 'Unpublished' }}</span>
             </td>
             <td class="options">
               <a href="/dashboard/posts/{{ $post->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>
@@ -144,9 +144,9 @@
             <td>{{ $comment->nickname }}</td>
             <td>{{ $comment->text }}</td>
             <td>
-              @if ($comment->status === 0)
+              @if ($comment->status == 0)
               <span class="comment-status rejected">Rejected</span>
-              @elseif($comment->status === 1)
+              @elseif($comment->status == 1)
               <span class="comment-status accepted">Accepted</span>
               @else
               <span class="comment-status waiting">Waiting</span>

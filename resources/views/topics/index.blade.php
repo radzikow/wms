@@ -48,7 +48,7 @@
               <td>{{ $topic->name }}</td>
               <td>{{ $topic->description }}</td>
               <td><span
-                  class="status {{ $topic->status === 1 ? 'active' : 'inactive' }}">{{ $topic->status === 1 ? 'Active' : 'Inactive' }}</span>
+                  class="status {{ $topic->status == 1 ? 'active' : 'inactive' }}">{{ $topic->status == 1 ? 'Active' : 'Inactive' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/topics/{{ $topic->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>

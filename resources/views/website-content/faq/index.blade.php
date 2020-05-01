@@ -49,7 +49,7 @@
               <td>{{ $faq->question }}</td>
               <td>{{ substr(strip_tags(html_entity_decode($faq->answer)), 0, 140) . '...' }}</td>
               <td><span
-                  class="status {{ $faq->status === 1 ? 'active' : 'inactive' }}">{{ $faq->status === 1 ? 'Active' : 'Inactive' }}</span>
+                  class="status {{ $faq->status == 1 ? 'active' : 'inactive' }}">{{ $faq->status == 1 ? 'Active' : 'Inactive' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/faq/{{ $faq->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>

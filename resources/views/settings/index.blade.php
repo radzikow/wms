@@ -41,7 +41,7 @@
               <td>{{ $key + 1 }}</td>
               <td>{{ $setting->nesting === 'Sidebar' ? $setting->name : $setting->nesting . ' / ' . $setting->name }}</td>
               <td><span
-                  class="status {{ $setting->status === 1 ? 'active' : 'inactive' }}">{{ $setting->status === 1 ? 'Active' : 'Inactive' }}</span>
+                  class="status {{ $setting->status == 1 ? 'active' : 'inactive' }}">{{ $setting->status == 1 ? 'Active' : 'Inactive' }}</span>
               </td>
               <td class="options">
                 {{-- make active --}}

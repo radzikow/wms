@@ -52,7 +52,7 @@
               <td>{{ $news->title }}</td>
               <td>{{ substr(strip_tags(html_entity_decode($news->content)), 0, 140) . '...' }}</td>
               <td><span
-                  class="status {{ $news->status === 1 ? 'published' : 'unpublished' }}">{{ $news->status === 1 ? 'Published' : 'Unpublished' }}</span>
+                  class="status {{ $news->status == 1 ? 'published' : 'unpublished' }}">{{ $news->status == 1 ? 'Published' : 'Unpublished' }}</span>
               </td>
               <td class="options">
                 <a href="/dashboard/news/{{ $news->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>
