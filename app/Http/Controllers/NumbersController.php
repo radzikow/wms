@@ -95,6 +95,20 @@ class NumbersController extends Controller
       // ------------------------------
       // update file content
       file_put_contents($path, $updated);
+
+      // ------------------------------
+      // create file numbers.json if it doesn't exist
+    } else if (!Storage::disk('local')->exists('numbers.json')) {
+
+      $data = [
+        "numbers" => [
+          "clients_no" => 0,
+          "projects_no" => 0,
+          "coffees_no" => 0
+        ]
+      ];
+
+      Storage::disk('local')->put('numbers.json', json_encode($data));
     }
 
     // ------------------------------
