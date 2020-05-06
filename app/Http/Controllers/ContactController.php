@@ -8,10 +8,42 @@ use Illuminate\Support\Facades\Session;
 
 class ContactController extends Controller
 {
+
+  // ===============================================================
   public function __construct()
   {
     $this->middleware('auth');
+
+    // ------------------------------
+    // create file contact.json if it doesn't exist
+    if (!Storage::disk('local')->exists('contact.json')) {
+
+      $data = [
+        "contact" => [
+          "company_name" => "",
+          "company_nip" => "",
+          "company_regon" => "",
+          "company_number1" => "",
+          "company_number2" => "",
+          "company_email1" => "",
+          "company_email2" => "",
+          "company_address1" => "",
+          "company_address2" => "",
+          "company_hours1" => "",
+          "company_hours2" => ""
+        ],
+        "social" => [
+          "linkedin" => "",
+          "facebook" => "",
+          "twitter" => ""
+        ]
+      ];
+
+      Storage::disk('local')->put('contact.json', json_encode($data));
+    }
   }
+
+  // ===============================================================
   /**
    * Display a listing of the resource.
    *
@@ -19,18 +51,42 @@ class ContactController extends Controller
    */
   public function index()
   {
-    // TODO: how to get json file from aws s3???
-    if (Storage::disk('s3')->exists('https://radzikowwmsbucket.s3.eu-central-1.amazonaws.com/wms-template/contact.json')) {
-      // get json file from aws s3
-      $path = Storage::disk('s3')->get('https://radzikowwmsbucket.s3.eu-central-1.amazonaws.com/wms-template/contact.json');
-    } else if (Storage::disk('local')->exists('contact.json')) {
+    if (Storage::disk('local')->exists('contact.json')) {
+      // ------------------------------
       // get json file from storage
       $path = Storage::disk('local')->get('contact.json');
-    } else {
-      // get json file from storage
-      $path = Storage::disk('public')->get('contact.json');
+
+      // ------------------------------
+      // create file contact.json if it doesn't exist
+    } else if (!Storage::disk('local')->exists('contact.json')) {
+
+      $data = [
+        "contact" => [
+          "company_name" => "",
+          "company_nip" => "",
+          "company_regon" => "",
+          "company_number1" => "",
+          "company_number2" => "",
+          "company_email1" => "",
+          "company_email2" => "",
+          "company_address1" => "",
+          "company_address2" => "",
+          "company_hours1" => "",
+          "company_hours2" => ""
+        ],
+        "social" => [
+          "linkedin" => "",
+          "facebook" => "",
+          "twitter" => ""
+        ]
+      ];
+
+      Storage::disk('local')->put('contact.json', json_encode($data));
     }
 
+
+    // ------------------------------
+    // convert json to array
     $content = json_decode($path, true);
 
     $contactInfo = $content['contact'];
@@ -39,16 +95,7 @@ class ContactController extends Controller
     return view('website-content.contact.index', ['contactInfo' => $contactInfo, 'socialLinks' => $socialLinks]);
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
-  }
-
+  // ===============================================================
   /**
    * Store a newly created resource in storage.
    *
@@ -59,8 +106,7 @@ class ContactController extends Controller
   {
     if ($request && Storage::exists('contact.json')) {
 
-      $path = public_path('storage/contact.json');
-      // $content = json_decode(file_get_contents($path), true);
+      $path = public_path('files/contact.json');
 
       $data = [
         "contact" => [
@@ -77,68 +123,49 @@ class ContactController extends Controller
           "company_hours2" => $request->companyHours2
         ],
         "social" => [
-          "linkedin" => "linkedin link",
-          "facebook" => "facebook link",
-          "twitter" => "twitter link"
+          "linkedin" => $request->linkedin,
+          "facebook" => $request->facebook,
+          "twitter" => $request->twitter
         ]
       ];
 
       $updated = json_encode($data);
 
       file_put_contents($path, $updated);
-    } else {
-      return 'Error occured when saving json file in app filestorage!';
+
+      // ------------------------------
+      // create file contact.json if it doesn't exist
+    } else if (!Storage::disk('local')->exists('contact.json')) {
+
+      $data = [
+        "contact" => [
+          "company_name" => "",
+          "company_nip" => "",
+          "company_regon" => "",
+          "company_number1" => "",
+          "company_number2" => "",
+          "company_email1" => "",
+          "company_email2" => "",
+          "company_address1" => "",
+          "company_address2" => "",
+          "company_hours1" => "",
+          "company_hours2" => ""
+        ],
+        "social" => [
+          "linkedin" => "",
+          "facebook" => "",
+          "twitter" => ""
+        ]
+      ];
+
+      Storage::disk('local')->put('contact.json', json_encode($data));
     }
 
-    // Create new alerts
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'Contact informations updated successfully!');
     Session::flash('alert-class', 'alert-success');
 
     return redirect('dashboard/contact');
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-    //
   }
 }
