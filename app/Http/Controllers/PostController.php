@@ -6,19 +6,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 use App\User;
 use App\Post;
 use App\Topic;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
 
 
 class PostController extends Controller
 {
+
+  // ===============================================================
   public function __construct()
   {
     $this->middleware('auth');
   }
+
+  // ===============================================================
   /**
    * Display a listing of the resource.
    *
@@ -36,6 +40,7 @@ class PostController extends Controller
     ]);
   }
 
+  // ===============================================================
   /**
    * Show the form for creating a new resource.
    *
@@ -49,6 +54,7 @@ class PostController extends Controller
     return view('posts.create', ['users' => $users, 'topics' => $topics]);
   }
 
+  // ===============================================================
   /**
    * Store a newly created resource in storage.
    *
@@ -57,16 +63,12 @@ class PostController extends Controller
    */
   public function store(Request $request)
   {
-    // Create new post instance
+    // ------------------------------
+    // new post instance
     $post = new Post();
 
-    // Get all users
-    $users = User::all();
-
-    // Get all topics
-    $topics = Topic::all();
-
-    // Modify status value
+    // ------------------------------
+    // modify status value
     $postStatus = request('postStatus');
     if ($postStatus === 'on') {
       $postStatus = 1;
@@ -74,7 +76,8 @@ class PostController extends Controller
       $postStatus = 0;
     }
 
-    // Inputs validation
+    // ------------------------------
+    // validation
     $validator = Validator::make($request->all(), [
       'postTitle' => 'required|min:10|max:100',
       'postAuthor' => 'required',
@@ -83,28 +86,34 @@ class PostController extends Controller
       'postTags' => 'required',
       'postShort' => 'required|min:200|max:800',
       'postLong' => 'required|min:800',
-      'postImage' => 'required|file|image|mimes:jpeg,jpg,png,gif|max:10000'
+      'postImage' => 'required|file|image|mimes:jpeg,jpg,png,gif|max:1000'
     ]);
 
-    // Check if any validation failed
     if ($validator->fails()) {
       return redirect('dashboard/posts/create')
         ->withErrors($validator)
         ->withInput();
     }
 
-    // Get file and save it to a filesystem
+    // ------------------------------
+    // image upload
     if ($request->hasFile('postImage')) {
 
       $image = $request->file('postImage');
+
+      // save to server (public)
       $imageExtension = $image->getClientOriginalExtension();
       $newImageName = rand() . '.' . $imageExtension;
-      $destinationPath = '/blog_images';
+      $public_destination = 'blog_images';
+      $public_path = $image->storeAs($public_destination, $newImageName);
 
-      $path = $image->storeAs($destinationPath, $newImageName);
+      // save to aws s3
+      $s3_destination = 'wms-template/images/blog';
+      $s3_path = Storage::disk('s3')->put($s3_destination, $image, 'public');
     }
 
-    // Save all input values to new post instance
+    // ------------------------------
+    // new post instace data
     $post->title = request('postTitle');
     $post->user_id = request('postAuthor');
     $post->date = request('postDate');
@@ -112,20 +121,26 @@ class PostController extends Controller
     $post->tags = request('postTags');
     $post->short_text = request('postShort');
     $post->long_text = request('postLong');
-    $post->image = $newImageName;
+    $post->image_public_path = $public_path;
+    $post->image_s3_path = $s3_path;
     $post->status = $postStatus;
 
-    // Save a new post to a db
+    // ------------------------------
+    // save new post to db
     $post->save();
 
-    // Create new alerts
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'New post created successfully!');
     Session::flash('alert-class', 'alert-success');
 
-    // Redirect
+    // ------------------------------
+    // redirect
+
     return redirect('/dashboard/posts');
   }
 
+  // ===============================================================
   /**
    * Display the specified resource.
    *
@@ -141,9 +156,11 @@ class PostController extends Controller
     $topics = Topic::all();
 
     $post = DB::table('posts')->find($id);
+
     return view('posts.edit', ['post' => $post, 'users' => $users, 'topics' => $topics]);
   }
 
+  // ===============================================================
   /**
    * Show the form for editing the specified resource.
    *
@@ -155,6 +172,7 @@ class PostController extends Controller
     return view('posts.edit');
   }
 
+  // ===============================================================
   /**
    * Update the specified resource in storage.
    *
@@ -164,7 +182,12 @@ class PostController extends Controller
    */
   public function update(Request $request)
   {
-    // Modify status value
+    // ------------------------------
+    // get post by id
+    $post = DB::table('posts')->find($request->postId);
+
+    // ------------------------------
+    // modify status value
     $postStatus = request('postStatus');
     if ($postStatus == 'on') {
       $postStatus = 1;
@@ -172,7 +195,8 @@ class PostController extends Controller
       $postStatus = 0;
     }
 
-    // Inputs validation
+    // ------------------------------
+    // validation
     $validator = Validator::make($request->all(), [
       'postTitle' => 'required|min:10|max:100',
       'postAuthor' => 'required',
@@ -181,26 +205,43 @@ class PostController extends Controller
       'postTags' => 'required',
       'postShort' => 'required|min:200|max:800',
       'postLong' => 'required|min:800',
-      'postImage' => 'file|image|mimes:jpeg,jpg,png,gif|max:10000'
+      'postImage' => 'file|image|mimes:jpeg,jpg,png,gif|max:1000'
     ]);
 
-    // Check if any validation failed
     if ($validator->fails()) {
       return redirect('/dashboard/posts/' . $request->postId)
         ->withErrors($validator)
         ->withInput();
     }
 
-    // Get file and save it to a filesystem
+    // ------------------------------
+    // image upload
     if ($request->hasFile('postImage')) {
-      $image = $request->file('postImage');
-      $imageExtension = $image->getClientOriginalExtension();
-      $newImageName = time() . '.' . $imageExtension;
-      $destinationPath = 'blog_images';
 
-      $path = $image->storeAs($destinationPath, $newImageName);
-    } else {
-      $newImageName = $request->postPrevImage;
+      $image = $request->file('postImage');
+
+      // save new image to server (public)
+      $imageExtension = $image->getClientOriginalExtension();
+      $newImageName = rand() . '.' . $imageExtension;
+      $public_destination = 'blog_images';
+      $public_path = $image->storeAs($public_destination, $newImageName);
+
+      // delete previous image from server (public)
+      Storage::delete($post->image);
+
+      // save new image to aws s3
+      $s3_destination = 'wms-template/images/blog';
+      $s3_path = Storage::disk('s3')->put($s3_destination, $image, 'public');
+
+      // delete previous image from aws 3s
+      Storage::disk('s3')->delete($post->image);
+
+      DB::table('posts')
+        ->where('id', $request->postId)
+        ->update([
+          "image_storage_path" => $public_path,
+          "image_s3_path" => $s3_path,
+        ]);
     }
 
     DB::table('posts')
@@ -213,7 +254,8 @@ class PostController extends Controller
         "tags" => $request->postTags,
         "short_text" => $request->postShort,
         "long_text" => $request->postLong,
-        "image" => $newImageName,
+        "image_storage_path" => $public_path,
+        "image_s3_path" => $s3_path,
         "status" => $postStatus,
       ]);
 
@@ -225,6 +267,7 @@ class PostController extends Controller
     return redirect('/dashboard/posts');
   }
 
+  // ===============================================================
   /**
    * Remove the specified resource from storage.
    *
@@ -233,12 +276,34 @@ class PostController extends Controller
    */
   public function destroy($id)
   {
+    // ------------------------------
+    // find post by id
     $post = Post::findOrFail($id);
+
+    // ------------------------------
+    // delete image from db
     $post->delete();
 
+    // ------------------------------
+    // delete image from public storage
+    Storage::delete($post->image_public_path);
+
+    // ------------------------------
+    // delete image from aws s3
+    Storage::disk('s3')->delete($post->image_s3_path);
+
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'Post deleted successfully!');
     Session::flash('alert-class', 'alert-success');
 
     return back();
   }
+
+  // public function showImage($url)
+  // {
+  //   $disk = Storage::disk('s3');
+  //   $path = $disk->url($url);
+  //   return $path;
+  // }
 }

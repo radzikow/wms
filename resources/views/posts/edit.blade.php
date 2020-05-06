@@ -46,7 +46,8 @@
           {{-- title --}}
           <div class="form-item">
             <label for="postTitle">Title</label>
-            <input type="text" name="postTitle" id="postTitle" value="{{ old('postTitle') ? old('postTitle') : $post->title }}">
+            <input type="text" name="postTitle" id="postTitle"
+              value="{{ old('postTitle') ? old('postTitle') : $post->title }}">
           </div>
 
           {{-- topic --}}
@@ -69,13 +70,15 @@
           {{-- tags --}}
           <div class="form-item">
             <label for="postTags">Tags (seperate by space)</label>
-            <input type="text" name="postTags" id="postTags" value="{{ old('postTags') ? old('postTags') : $post->tags }}">
+            <input type="text" name="postTags" id="postTags"
+              value="{{ old('postTags') ? old('postTags') : $post->tags }}">
           </div>
 
           {{-- short text --}}
           <div class="form-item">
             <label for="postShort">Short text</label>
-            <textarea name="postShort" id="postShort" cols="30" rows="5">{{ old('postShort') ? old('postShort') : $post->short_text }}</textarea>
+            <textarea name="postShort" id="postShort" cols="30"
+              rows="5">{{ old('postShort') ? old('postShort') : $post->short_text }}</textarea>
             <script>
               CKEDITOR.replace( 'postShort' );
             </script>
@@ -84,7 +87,8 @@
           {{-- long text /editor --}}
           <div class="form-item">
             <label for="postLong">Long text</label>
-            <textarea name="postLong" id="postLong" cols="30" rows="25">{{ old('postLong') ? old('postLong') : $post->long_text }}</textarea>
+            <textarea name="postLong" id="postLong" cols="30"
+              rows="25">{{ old('postLong') ? old('postLong') : $post->long_text }}</textarea>
             <script>
               CKEDITOR.replace( 'postLong' );
             </script>
@@ -92,16 +96,17 @@
 
           {{-- image --}}
           <div class="form-item">
-            <label for="postImage">Upload new image</label>
+            <label for="postImage">Upload new image (max 1MB)</label>
             <p class="additional-info">Skip uploading image if you want to use already used one.</p>
             <input type="file" name="postImage" id="postImage">
           </div>
 
           {{-- image preview --}}
           <div class="form-item">
-            <label for="postPrevImage">Old image preview</label>
-            <img class="image-preview" src="{{ asset('storage/blog_images/'.$post->image) }}" alt="Post Image">
-            <input type="hidden" name="postPrevImage" value="{{ $post->image }}">
+            <label for="postPrevImage">Image preview</label>
+            <img class="image-preview" src="{{ Storage::disk('s3')->url($post->image_s3_path) }}" alt="Post Image">
+            {{-- <img class="image-preview" src="{{ showImage($post->image_s3_path) }}" alt="Post Image"> --}}
+            <input type="hidden" name="postPrevImage" value="{{ $post->image_s3_path }}">
           </div>
 
           {{-- author --}}
@@ -110,16 +115,16 @@
             <select class="{{ $errors->has('postAuthor') ? 'has-error' :'' }}" name="postAuthor" id="postAuthor">
               <option value="" disabled hidden>Choose author</option>
               @foreach($users as $user)
-                @if (old('postAuthor'))
-                <option value="{{ $user->id }}" {{
+              @if (old('postAuthor'))
+              <option value="{{ $user->id }}" {{
             old('postAuthor') == $user->id ? 'selected' :'' }}>
-                  {{ $user->firstname . ' ' . $user->lastname }}
-                </option>
-                @else
-                <option value="{{ $user->id }}" {{ $post->user_id == $user->id ? 'selected' :'' }}>
-                  {{ $user->firstname . ' ' . $user->lastname }}
-                </option>
-                @endif
+                {{ $user->firstname . ' ' . $user->lastname }}
+              </option>
+              @else
+              <option value="{{ $user->id }}" {{ $post->user_id == $user->id ? 'selected' :'' }}>
+                {{ $user->firstname . ' ' . $user->lastname }}
+              </option>
+              @endif
               @endforeach
             </select>
           </div>

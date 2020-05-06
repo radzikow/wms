@@ -19,8 +19,18 @@ class ContactController extends Controller
    */
   public function index()
   {
-    // Get json file from storage
-    $path = Storage::disk('public')->get('contact.json');
+    // TODO: how to get json file from aws s3???
+    if (Storage::disk('s3')->exists('https://radzikowwmsbucket.s3.eu-central-1.amazonaws.com/wms-template/contact.json')) {
+      // get json file from aws s3
+      $path = Storage::disk('s3')->get('https://radzikowwmsbucket.s3.eu-central-1.amazonaws.com/wms-template/contact.json');
+    } else if (Storage::disk('local')->exists('contact.json')) {
+      // get json file from storage
+      $path = Storage::disk('local')->get('contact.json');
+    } else {
+      // get json file from storage
+      $path = Storage::disk('public')->get('contact.json');
+    }
+
     $content = json_decode($path, true);
 
     $contactInfo = $content['contact'];

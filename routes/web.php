@@ -129,41 +129,35 @@ Route::put('/dashboard/testimonials', 'TestimonialController@update');
 Route::delete('/dashboard/testimonials/{id}', 'TestimonialController@destroy');
 
 // Clearing page
-Route::get('/clear', function() {
+Route::get('/clear', function () {
   return view('clear');
 });
 
 // Clear cache facade value:
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
   $exitCode = Artisan::call('cache:clear');
-  // Session::flash('clear-message', 'Cache facade value cleared!');
   return back()->with('clear-message', 'Cache facade value cleared!');
 });
 
-// Route cache:
-Route::get('/route-cache', function() {
-  $exitCode = Artisan::call('route:cache');
-  // Session::flash('clear-message', 'Routes cached!');
-  return back()->with('clear-message', 'Routes cached!');
-});
-
 // Clear route cache:
-Route::get('/route-clear', function() {
+Route::get('/clear-route', function () {
   $exitCode = Artisan::call('route:clear');
-  // Session::flash('clear-message', 'Route cache cleared!');
   return back()->with('clear-message', 'Route cache cleared!');
 });
 
 // Clear view cache:
-Route::get('/view-clear', function() {
+Route::get('/clear-view', function () {
   $exitCode = Artisan::call('view:clear');
-  // Session::flash('clear-message', 'View cache cleared!');
   return back()->with('clear-message', 'View cache cleared!');
 });
 
 // Clear config cache:
-Route::get('/config-cache', function() {
-  $exitCode = Artisan::call('config:cache');
-  // Session::flash('clear-message', 'Clear Config cleared!');
+Route::get('/clear-config', function () {
+  $exitCode = Artisan::call('config:clear');
   return back()->with('clear-message', 'Config cache cleared!');
+});
+
+// Create Symlink
+Route::get('/symlink', function () {
+  Artisan::call('storage:link');
 });

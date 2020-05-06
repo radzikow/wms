@@ -37446,9 +37446,9 @@ function hideProfilePass() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Radek\Desktop\Laravel Projects\wms-system\wms-template\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\Radek\Desktop\Laravel Projects\wms-system\wms-template\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\Radek\Desktop\Laravel Projects\wms-system\wms-template\resources\sass\main.scss */"./resources/sass/main.scss");
+__webpack_require__(/*! C:\Users\Radek\Desktop\Laravel Projects\wms\wms-template\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Radek\Desktop\Laravel Projects\wms\wms-template\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\Radek\Desktop\Laravel Projects\wms\wms-template\resources\sass\main.scss */"./resources/sass/main.scss");
 
 
 /***/ })

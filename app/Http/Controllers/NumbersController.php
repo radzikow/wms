@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
+use App\AwsUpload;
+
 class NumbersController extends Controller
 {
   public function __construct()
@@ -19,13 +21,13 @@ class NumbersController extends Controller
    */
   public function index()
   {
-    // Get json file from storage
-    $path = Storage::disk('public')->get('numbers.json');
+    if (Storage::disk('local')->exists('numbers.json')) {
+      // get json file from storage
+      $path = Storage::disk('local')->get('numbers.json');
+    }
+
     $content = json_decode($path, true);
-
     $numbers = $content['numbers'];
-
-    // return json_decode(Storage::disk('public')->get('numbers.json'), true);
 
     return view('website-content.numbers.index', ['numbers' => $numbers]);
   }
@@ -48,24 +50,23 @@ class NumbersController extends Controller
    */
   public function store(Request $request)
   {
-    if ($request && Storage::exists('numbers.json')) {
+    if ($request && Storage::disk('local')->exists('numbers.json')) {
 
-      $path = public_path('storage/numbers.json');
-      // $content = json_decode(file_get_contents($path), true);
+      $path = public_path('files/numbers.json');
 
       $data = [
         "numbers" => [
           "clients_no" => $request->clientsNumber,
           "projects_no" => $request->projectsNumber,
           "coffees_no" => $request->coffeesNumber
-        ]
-      ];
+          ]
+        ];
 
-      $updated = json_encode($data);
+        $updated = json_encode($data);
 
       file_put_contents($path, $updated);
     } else {
-      return 'Error occured when saving json file in app filestorage!';
+      return 'Error occured when saving json file in app file storage!';
     }
 
     // Create new alerts

@@ -90,7 +90,7 @@
 
           {{-- image --}}
           <div class="form-item">
-            <label for="postImage">Upload main image</label>
+            <label for="postImage">Upload image (max 1MB)</label>
             <input class="{{ $errors->has('postImage') ? 'has-error' :'' }}" type="file" name="postImage"
               id="postImage">
           </div>

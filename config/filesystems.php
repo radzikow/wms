@@ -46,22 +46,16 @@ return [
 
     'local' => [
       'driver' => 'local',
-      'root' => storage_path('app'),
-      // 'root' => public_path('blog_images/'),
+      // 'root' => storage_path('app'),
+      'root' => public_path('files'),
     ],
 
     'public' => [
       'driver' => 'local',
-      'root' => public_path('app/public'),
+      'root' => storage_path('app/public'),
       'url' => env('APP_URL') . '/storage',
       'visibility' => 'public',
     ],
-    // 'public' => [
-    //     'driver' => 'local',
-    //     'root' => public_path() . '/uploads',
-    //     'url' => env('APP_URL').'/public',
-    //     'visibility' => 'public',
-    // ],
 
     's3' => [
       'driver' => 's3',
@@ -70,6 +64,8 @@ return [
       'region' => env('AWS_DEFAULT_REGION'),
       'bucket' => env('AWS_BUCKET'),
       'endpoint' => env('AWS_URL'),
+      // 'visibility' => 'public',
+      // 'url' => env('AWS_URL') . '/wms-template',
     ],
 
   ],
