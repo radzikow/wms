@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
-use App\AwsUpload;
-
 class NumbersController extends Controller
 {
 
@@ -15,6 +13,21 @@ class NumbersController extends Controller
   public function __construct()
   {
     $this->middleware('auth');
+
+    // ------------------------------
+    // create file numbers.json if it doesn't exist
+    if (!Storage::disk('local')->exists('numbers.json')) {
+
+      $data = [
+        "numbers" => [
+          "clients_no" => 0,
+          "projects_no" => 0,
+          "coffees_no" => 0
+        ]
+      ];
+
+      Storage::disk('local')->put('numbers.json', json_encode($data));
+    }
   }
 
   // ===============================================================
@@ -26,25 +39,32 @@ class NumbersController extends Controller
   public function index()
   {
     if (Storage::disk('local')->exists('numbers.json')) {
+      // ------------------------------
       // get json file from storage
       $path = Storage::disk('local')->get('numbers.json');
+
+      // ------------------------------
+      // create file numbers.json if it doesn't exist
+    } else if (!Storage::disk('local')->exists('numbers.json')) {
+
+      $data = [
+        "numbers" => [
+          "clients_no" => 0,
+          "projects_no" => 0,
+          "coffees_no" => 0
+        ]
+      ];
+
+      Storage::disk('local')->put('numbers.json', json_encode($data));
     }
 
+    // ------------------------------
+    // convert json to array
     $content = json_decode($path, true);
+
     $numbers = $content['numbers'];
 
     return view('website-content.numbers.index', ['numbers' => $numbers]);
-  }
-
-  // ===============================================================
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
   }
 
   // ===============================================================
@@ -83,55 +103,5 @@ class NumbersController extends Controller
     Session::flash('alert-class', 'alert-success');
 
     return redirect('dashboard/numbers');
-  }
-
-  // ===============================================================
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-
-  // ===============================================================
-  public function edit($id)
-  {
-    //
-  }
-
-  // ===============================================================
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  // ===============================================================
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy($id)
-  {
-    //
   }
 }

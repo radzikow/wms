@@ -17,7 +17,6 @@ class PolicyController extends Controller
     // ------------------------------
     // create file policy.txt if it doesn't exist
     if (!Storage::disk('local')->exists('policy.txt')) {
-      // $path = Storage::disk('local');
       Storage::disk('local')->put('policy.txt', 'no policy');
     }
   }
