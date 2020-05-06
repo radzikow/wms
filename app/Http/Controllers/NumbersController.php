@@ -10,10 +10,14 @@ use App\AwsUpload;
 
 class NumbersController extends Controller
 {
+
+  // ===============================================================
   public function __construct()
   {
     $this->middleware('auth');
   }
+
+  // ===============================================================
   /**
    * Display a listing of the resource.
    *
@@ -32,6 +36,7 @@ class NumbersController extends Controller
     return view('website-content.numbers.index', ['numbers' => $numbers]);
   }
 
+  // ===============================================================
   /**
    * Show the form for creating a new resource.
    *
@@ -42,6 +47,7 @@ class NumbersController extends Controller
     //
   }
 
+  // ===============================================================
   /**
    * Store a newly created resource in storage.
    *
@@ -52,6 +58,8 @@ class NumbersController extends Controller
   {
     if ($request && Storage::disk('local')->exists('numbers.json')) {
 
+      // ------------------------------
+      // get file path
       $path = public_path('files/numbers.json');
 
       $data = [
@@ -59,23 +67,25 @@ class NumbersController extends Controller
           "clients_no" => $request->clientsNumber,
           "projects_no" => $request->projectsNumber,
           "coffees_no" => $request->coffeesNumber
-          ]
-        ];
+        ]
+      ];
 
-        $updated = json_encode($data);
+      $updated = json_encode($data);
 
+      // ------------------------------
+      // update file content
       file_put_contents($path, $updated);
-    } else {
-      return 'Error occured when saving json file in app file storage!';
     }
 
-    // Create new alerts
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'Numbers updated successfully!');
     Session::flash('alert-class', 'alert-success');
 
     return redirect('dashboard/numbers');
   }
 
+  // ===============================================================
   /**
    * Display the specified resource.
    *
@@ -93,11 +103,14 @@ class NumbersController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  // ===============================================================
   public function edit($id)
   {
     //
   }
 
+  // ===============================================================
   /**
    * Update the specified resource in storage.
    *
@@ -110,6 +123,7 @@ class NumbersController extends Controller
     //
   }
 
+  // ===============================================================
   /**
    * Remove the specified resource from storage.
    *
