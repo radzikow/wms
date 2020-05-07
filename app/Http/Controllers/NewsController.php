@@ -64,6 +64,15 @@ class NewsController extends Controller
 
     // Check if any validation failed
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
+
       return redirect('/dashboard/news/create')
         ->withErrors($validator)
         ->withInput();
@@ -149,6 +158,14 @@ class NewsController extends Controller
 
     // Check if any validation failed
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboard/news/'  . $request->newsId)
         ->withErrors($validator)
         ->withInput();

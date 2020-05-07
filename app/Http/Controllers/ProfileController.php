@@ -28,8 +28,6 @@ class ProfileController extends Controller
 
     $user = Auth::user();
 
-    // return $passStatus;
-
     return view('profile.index', ['user' => $user]);
   }
 
@@ -49,6 +47,14 @@ class ProfileController extends Controller
       ]);
 
       if ($validator->fails()) {
+
+        // ------------------------------
+        // alerts
+        Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+        Session::flash('alert-class', 'alert-danger');
+
+        // ------------------------------
+        // redirect with validation messages
         return redirect()->back()
           ->withErrors($validator)
           ->withInput();
@@ -71,6 +77,13 @@ class ProfileController extends Controller
 
       if ($validator->fails()) {
 
+        // ------------------------------
+        // alerts
+        Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+        Session::flash('alert-class', 'alert-danger');
+
+        // ------------------------------
+        // redirect with validation messages
         return redirect()->back()
           ->withErrors($validator)
           ->withInput();
@@ -100,29 +113,42 @@ class ProfileController extends Controller
     $user = DB::table('users')->find($user_id);
 
     // check if current password is correct
-    if(Hash::check($request->currentPassword, $user->password))
-    {
+    if (Hash::check($request->currentPassword, $user->password)) {
       $validator = Validator::make($request->all(), [
         'currentPassword' => ['required', new CheckPass],
         'newPassword' => 'required|confirmed|min:4',
         'newPassword_confirmation' => 'required'
-        ]);
+      ]);
 
       if ($validator->fails()) {
+
+        // ------------------------------
+        // alerts
+        Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+        Session::flash('alert-class', 'alert-danger');
+
+        // ------------------------------
+        // redirect with validation messages
         return redirect()->back()
           ->withErrors($validator)
           ->withInput();
       }
-    }
-    else
-    {
+    } else {
       $validator = Validator::make($request->all(), [
         'currentPassword' => ['required', new CheckPass],
         'newPassword' => 'required|confirmed|min:4',
         'newPassword_confirmation' => 'required'
-        ]);
+      ]);
 
       if ($validator->fails()) {
+
+        // ------------------------------
+        // alerts
+        Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+        Session::flash('alert-class', 'alert-danger');
+
+        // ------------------------------
+        // redirect with validation messages
         return redirect()->back()
           ->withErrors($validator)
           ->withInput();

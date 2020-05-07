@@ -62,6 +62,14 @@ class FaqController extends Controller
 
     // Check if any validation failed
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboard/faq/create')
         ->withErrors($validator)
         ->withInput();
@@ -132,6 +140,14 @@ class FaqController extends Controller
 
     // Check if any validation failed
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboard/faq/' . $request->faqId)
         ->withErrors($validator)
         ->withInput();

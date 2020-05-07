@@ -2,11 +2,11 @@
 <div id="alert" class="alert-wrapper {{ Session::get('alert-class') }}">
 
   <div class="alert-image">
-    @if(Session::has('alert-class') === 'success')
+    @if(Session::has('alert-class') && Session::get('alert-class') == 'alert-success')
     <img src="{{ asset('/svg/success.svg') }}" alt="Success">
-    @elseif(Session::has('alert-class') === 'warning')
+    @elseif(Session::has('alert-class') && Session::get('alert-class') ==  'alert-warning')
     <img src="{{ asset('/svg/warning.svg') }}" alt="Warning">
-    @elseif(Session::has('alert-class') === 'danger')
+    @elseif(Session::has('alert-class') && Session::get('alert-class') ==  'alert-danger')
     <img src="{{ asset('/svg/danger.svg') }}" alt="Danger">
     @else
     <img src="{{ asset('/svg/success.svg') }}" alt="Success">

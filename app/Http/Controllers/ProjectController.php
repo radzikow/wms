@@ -64,6 +64,14 @@ class ProjectController extends Controller
 
     // Check if any validation failed
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('dashboard/projects/create')
         ->withErrors($validator)
         ->withInput();
@@ -152,6 +160,14 @@ class ProjectController extends Controller
 
     // Check if any validation failed
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('dashboard/projects/' . $request->projectId)
         ->withErrors($validator)
         ->withInput();

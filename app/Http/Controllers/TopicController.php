@@ -60,6 +60,14 @@ class TopicController extends Controller
     ]);
 
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboardtopics/create')
         ->withErrors($validator)
         ->withInput();
@@ -123,6 +131,14 @@ class TopicController extends Controller
     ]);
 
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboard/topics/' . $request->topicId)
         ->withErrors($validator)
         ->withInput();

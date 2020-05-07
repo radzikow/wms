@@ -24,12 +24,6 @@ class UserController extends Controller
    */
   public function index()
   {
-    // $users = User::all();
-    // $users = User::paginate(7);
-    // $posts = User::find(1)->posts;
-    // $posts = Post::all();
-    // $posts = Post::where('user_id', 2)->get();
-
     $users = User::sortable()->paginate(10);
 
     return view('users.index', ['users' => $users]);
@@ -72,6 +66,14 @@ class UserController extends Controller
     ]);
 
     if ($validator->fails()) {
+
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboard/users/create')
         ->withErrors($validator)
         ->withInput();
@@ -143,6 +145,14 @@ class UserController extends Controller
       ]);
 
       if ($validator->fails()) {
+
+        // ------------------------------
+        // alerts
+        Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+        Session::flash('alert-class', 'alert-danger');
+
+        // ------------------------------
+        // redirect with validation messages
         return redirect('/dashboard/users/' . $request->userId)
           ->withErrors($validator)
           ->withInput();
