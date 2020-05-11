@@ -2,12 +2,11 @@
 .main-wrapper {
   width: 100%;
   min-height: calc(100% - 70px);
-  padding: 95px 30px 25px 30px;
+  padding: 95px 15px 25px 15px;
   overflow: hidden;
 
   @include md-devices {
-    width: 100%;
-    padding-left: 95px;
+    padding: 95px 30px 25px 95px;
   }
 
   // Title
@@ -295,7 +294,7 @@
                 width: 40px;
               }
               &:nth-child(3) {
-                width: 80px;
+                width: 120px;
               }
               &:nth-child(4) {
                 width: 180px;
@@ -578,13 +577,13 @@
                 width: 40px;
               }
               &:nth-child(2) {
-                width: 80px;
+                width: 120px;
               }
               &:nth-child(3) {
-                width: 80px;
+                width: 120px;
               }
               &:nth-child(4) {
-                width: 120px;
+                width: 180px;
               }
               &:nth-child(5) {
                 width: 100px;
