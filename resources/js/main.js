@@ -217,31 +217,37 @@ function hideNavBlog() {
 
 
 // =================================
-// Hide alerts
+// Close alert
 // =================================
 
 const closeAlertBtn = document.getElementById('closeAlertBtn');
+const alertWrapper = document.getElementById('alert');
+
+function hideAlert() {
+  const alert = document.getElementById('alert');
+  alert.classList.add('hideAlert');
+}
+
+function autoHideAlert() {
+  setTimeout(hideAlert, 11000);
+}
 
 if (closeAlertBtn) {
   closeAlertBtn.addEventListener('click', hideAlert);
-
-  function hideAlert() {
-    const alert = document.getElementById('alert');
-    alert.classList.add('hideAlert');
-  }
-  function hideAlertAfter() {
-    setTimeout(hideAlert, 11000);
-  }
-
-  hideAlertAfter();
 }
+
+if (alertWrapper) {
+  alertWrapper.addEventListener('click', hideAlert);
+}
+
+autoHideAlert();
 
 
 // =================================
 // CKEditor
 // =================================
 
-const updatePolicyBtn = document.getElementById('updatePolicyBtn');
+// const updatePolicyBtn = document.getElementById('updatePolicyBtn');
 
 // updatePolicyBtn.addEventListener('click', updatePolicy);
 

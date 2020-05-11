@@ -37323,30 +37323,35 @@ function hideNavBlog() {
     item.classList.remove('toggle-blog-subpages');
   });
 } // =================================
-// Hide alerts
+// Close alert
 // =================================
 
 
 var closeAlertBtn = document.getElementById('closeAlertBtn');
+var alertWrapper = document.getElementById('alert');
+
+function hideAlert() {
+  var alert = document.getElementById('alert');
+  alert.classList.add('hideAlert');
+}
+
+function autoHideAlert() {
+  setTimeout(hideAlert, 11000);
+}
 
 if (closeAlertBtn) {
-  var hideAlert = function hideAlert() {
-    var alert = document.getElementById('alert');
-    alert.classList.add('hideAlert');
-  };
-
-  var hideAlertAfter = function hideAlertAfter() {
-    setTimeout(hideAlert, 11000);
-  };
-
   closeAlertBtn.addEventListener('click', hideAlert);
-  hideAlertAfter();
-} // =================================
+}
+
+if (alertWrapper) {
+  alertWrapper.addEventListener('click', hideAlert);
+}
+
+autoHideAlert(); // =================================
 // CKEditor
 // =================================
-
-
-var updatePolicyBtn = document.getElementById('updatePolicyBtn'); // updatePolicyBtn.addEventListener('click', updatePolicy);
+// const updatePolicyBtn = document.getElementById('updatePolicyBtn');
+// updatePolicyBtn.addEventListener('click', updatePolicy);
 // let policy = 'Here goes a privacy & cookies policy...';
 // CKEDITOR.instances.policyContent.setData(policy);
 // function updatePolicy() {
