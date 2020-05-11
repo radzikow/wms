@@ -336,7 +336,7 @@ $(document).ready(function () {
   $('#uploadedPostImage').change(function () {
     var reader = new FileReader();
     reader.onload = (e) => {
-      $('#uploadedImagePreview').attr('src', e.target.result);
+      $('#uploadedPostImagePreview').attr('src', e.target.result);
     }
     reader.readAsDataURL(this.files[0]);
   });
@@ -353,7 +353,7 @@ $(document).ready(function () {
   $('#editedPostImage').change(function () {
     var reader = new FileReader();
     reader.onload = (e) => {
-      $('#editedImagePreview').attr('src', e.target.result);
+      $('#editedPostImagePreview').attr('src', e.target.result);
     }
     reader.readAsDataURL(this.files[0]);
   });
@@ -361,6 +361,43 @@ $(document).ready(function () {
   $("#editedPostImage").change(function () {
     readURL(this);
   });
+
+
+  // =================================
+  // Uploaded banner image prev (create banner)
+  // =================================
+
+  $('#uploadedBannerImage').change(function () {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      $('#uploadedBannerImagePreview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  $("#uploadedBannerImage").change(function () {
+    readURL(this);
+  });
+
+
+  // =================================
+  // Uploaded banner image prev (edit banner)
+  // =================================
+
+  $('#editedBannerImage').change(function () {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      $('#editedBannerImagePreview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  $("#editedBannerImage").change(function () {
+    readURL(this);
+  });
+
+
+
 });
 
 

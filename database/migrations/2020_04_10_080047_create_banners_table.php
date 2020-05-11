@@ -21,7 +21,8 @@ class CreateBannersTable extends Migration
       $table->string('text_2')->nullable();
       $table->string('btn_link')->nullable();
       $table->string('btn_text')->nullable();
-      $table->string('image');
+      $table->string('image_public_path');
+      $table->string('image_s3_path');
       $table->integer('status')->default(0);
       $table->boolean('deleted')->default(false);
       $table->timestamps();
@@ -34,7 +35,8 @@ class CreateBannersTable extends Migration
         'text_2' => 'Mauris tincidunt egestas faucibus.',
         'btn_link' => 'https://xyz.com/',
         'btn_text' => 'See product',
-        'image' => '428571888.JPG',
+        'image_public_path' => '428571888.JPG',
+        'image_s3_path' => '428571888.JPG',
         'status' => 0
       ],
       [
@@ -43,7 +45,8 @@ class CreateBannersTable extends Migration
         'text_2' => 'Praesent pulvinar eu justo id facilisis.',
         'btn_link' => 'https://xyz.com/',
         'btn_text' => 'See product',
-        'image' => '556114385.JPG',
+        'image_public_path' => '428571888.JPG',
+        'image_s3_path' => '428571888.JPG',
         'status' => 1
       ],
       [
@@ -52,7 +55,8 @@ class CreateBannersTable extends Migration
         'text_2' => 'In auctor magna quis mattis tempor. Etiam fringilla et lacus nec ullamcorper. Nullam et tincidunt tortor.',
         'btn_link' => 'https://xyz.com/',
         'btn_text' => 'See product',
-        'image' => '556114385.JPG',
+        'image_public_path' => '428571888.JPG',
+        'image_s3_path' => '428571888.JPG',
         'status' => 1
       ]
     ]);

@@ -7,13 +7,18 @@ use App\Banner;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
+
+  // ================================================
   public function __construct()
   {
     $this->middleware('auth');
   }
+
+  // ================================================
   /**
    * Display a listing of the resource.
    *
@@ -28,6 +33,7 @@ class BannerController extends Controller
     ]);
   }
 
+  // ================================================
   /**
    * Show the form for creating a new resource.
    *
@@ -38,6 +44,7 @@ class BannerController extends Controller
     return view('website-content.banners.create');
   }
 
+  // ================================================
   /**
    * Store a newly created resource in storage.
    *
@@ -46,9 +53,12 @@ class BannerController extends Controller
    */
   public function store(Request $request)
   {
+    // ------------------------------
+    // new banner instance
     $banner = new Banner();
 
-    // Modify status value
+    // ------------------------------
+    // modify status value
     $bannerStatus = request('bannerStatus');
     if ($bannerStatus === 'on') {
       $bannerStatus = 1;
@@ -56,15 +66,14 @@ class BannerController extends Controller
       $bannerStatus = 0;
     }
 
-    // Inputs validation
+    // ------------------------------
+    // validation
     $validator = Validator::make($request->all(), [
       'bannerTitle' => 'required|min:10|max:150',
       'bannerImage' => 'required|file|image|mimes:jpeg,jpg,png,gif|max:10000'
     ]);
 
-    // Check if any validation failed
     if ($validator->fails()) {
-
       // ------------------------------
       // alerts
       Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
@@ -77,36 +86,49 @@ class BannerController extends Controller
         ->withInput();
     }
 
-    // Get file and save it to a filesystem
+    // ------------------------------
+    // image upload
     if ($request->hasFile('bannerImage')) {
 
       $image = $request->file('bannerImage');
+
+      // save to server (public)
       $imageExtension = $image->getClientOriginalExtension();
       $newImageName = rand() . '.' . $imageExtension;
-      $destinationPath = 'banners_images';
+      $public_destination = 'banners_images';
+      $public_path = $image->storeAs($public_destination, $newImageName);
 
-      $path = $image->storeAs($destinationPath, $newImageName);
+      // save to aws s3
+      $s3_destination = 'wms-template/images/banners';
+      $s3_path = Storage::disk('s3')->put($s3_destination, $image, 'public');
     }
 
-    // Save all input values to new post instance
+    // ------------------------------
+    // new banner instace data
     $banner->title = request('bannerTitle');
     $banner->text_1 = request('bannerText1');
     $banner->text_2 = request('bannerText2');
     $banner->btn_link = request('bannerBtnLink');
     $banner->btn_text = request('bannerBtnText');
-    $banner->image = $newImageName;
+    $banner->image_public_path = $public_path;
+    $banner->image_s3_path = $s3_path;
     $banner->status = $bannerStatus;
 
+    // ------------------------------
+    // save new banner to db
     $banner->save();
 
-    // Create new alerts
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'New banner created successfully!');
     Session::flash('alert-class', 'alert-success');
 
-    // Redirect
+    // ------------------------------
+    // redirect
     return redirect('/dashboard/banners');
   }
 
+  // ================================================
   /**
    * Display the specified resource.
    *
@@ -120,6 +142,7 @@ class BannerController extends Controller
     return view('website-content.banners.edit', ['banner' => $banner]);
   }
 
+  // ================================================
   /**
    * Show the form for editing the specified resource.
    *
@@ -131,6 +154,7 @@ class BannerController extends Controller
     return view('website-content.banners.edit');
   }
 
+  // ================================================
   /**
    * Update the specified resource in storage.
    *
@@ -140,7 +164,12 @@ class BannerController extends Controller
    */
   public function update(Request $request)
   {
-    // Modify status value
+    // ------------------------------
+    // get banner by id
+    $banner = DB::table('banners')->find($request->bannerId);
+
+    // ------------------------------
+    // modify status value
     $bannerStatus = request('bannerStatus');
     if ($bannerStatus === 'on') {
       $bannerStatus = 1;
@@ -148,15 +177,14 @@ class BannerController extends Controller
       $bannerStatus = 0;
     }
 
-    // Inputs validation
+    // ------------------------------
+    // validation
     $validator = Validator::make($request->all(), [
       'bannerTitle' => 'required|min:10|max:150',
-      'bannerImage' => 'file|image|mimes:jpeg,jpg,png,gif|max:10000'
+      'bannerImage' => 'file|image|mimes:jpeg,jpg,png,gif|max:1000'
     ]);
 
-    // Check if any validation failed
     if ($validator->fails()) {
-
       // ------------------------------
       // alerts
       Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
@@ -169,16 +197,34 @@ class BannerController extends Controller
         ->withInput();
     }
 
-    // Get file and save it to a filesystem
+    // ------------------------------
+    // image upload
     if ($request->hasFile('bannerImage')) {
+
       $image = $request->file('bannerImage');
+
+      // save new image to server (public)
       $imageExtension = $image->getClientOriginalExtension();
       $newImageName = rand() . '.' . $imageExtension;
-      $destinationPath = 'banners_images';
+      $public_destination = 'banners_images';
+      $public_path = $image->storeAs($public_destination, $newImageName);
 
-      $path = $image->storeAs($destinationPath, $newImageName);
-    } else {
-      $newImageName = $request->bannerPrevImage;
+      // delete previous image from server (public)
+      Storage::delete($banner->image_public_path);
+
+      // save new image to aws s3
+      $s3_destination = 'wms-template/images/banners';
+      $s3_path = Storage::disk('s3')->put($s3_destination, $image, 'public');
+
+      // delete previous image from aws 3s
+      Storage::disk('s3')->delete($banner->image_s3_path);
+
+      DB::table('banners')
+        ->where('id', $request->bannerId)
+        ->update([
+          "image_public_path" => $public_path,
+          "image_s3_path" => $s3_path,
+        ]);
     }
 
     DB::table('banners')
@@ -189,18 +235,20 @@ class BannerController extends Controller
         "text_2" => $request->bannerText2,
         "btn_link" => $request->bannerBtnLink,
         "btn_text" => $request->bannerBtnText,
-        "image" => $newImageName,
         "status" => $bannerStatus,
       ]);
 
-    // Create new alert
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'Banner updated successfully!');
     Session::flash('alert-class', 'alert-success');
 
-    // Redirect
+    // ------------------------------
+    // redirect
     return redirect('/dashboard/banners');
   }
 
+  // ================================================
   /**
    * Remove the specified resource from storage.
    *
@@ -209,9 +257,24 @@ class BannerController extends Controller
    */
   public function destroy($id)
   {
+    // ------------------------------
+    // find post by id
     $banner = Banner::findOrFail($id);
+
+    // ------------------------------
+    // delete image from db
     $banner->delete();
 
+    // ------------------------------
+    // delete image from public storage
+    Storage::delete($banner->image_public_path);
+
+    // ------------------------------
+    // delete image from aws s3
+    Storage::disk('s3')->delete($banner->image_s3_path);
+
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'Banner deleted successfully!');
     Session::flash('alert-class', 'alert-success');
 

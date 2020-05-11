@@ -97,8 +97,8 @@
 
           {{-- image preview --}}
           <div class="form-item">
-            <label for="postPrevImage">Image preview</label>
-            <img src="" id="uploadedImagePreview" class="image-preview" alt="Post Image">
+            <label>Image preview</label>
+            <img src="" id="uploadedPostImagePreview" class="image-preview" alt="Post Image">
           </div>
 
           {{-- author --}}

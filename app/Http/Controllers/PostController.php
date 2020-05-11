@@ -16,13 +16,13 @@ use App\Topic;
 class PostController extends Controller
 {
 
-  // ===============================================================
+  // ================================================
   public function __construct()
   {
     $this->middleware('auth');
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Display a listing of the resource.
    *
@@ -40,7 +40,7 @@ class PostController extends Controller
     ]);
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Show the form for creating a new resource.
    *
@@ -54,7 +54,7 @@ class PostController extends Controller
     return view('posts.create', ['users' => $users, 'topics' => $topics]);
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Store a newly created resource in storage.
    *
@@ -90,7 +90,6 @@ class PostController extends Controller
     ]);
 
     if ($validator->fails()) {
-
       // ------------------------------
       // alerts
       Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
@@ -144,11 +143,10 @@ class PostController extends Controller
 
     // ------------------------------
     // redirect
-
     return redirect('/dashboard/posts');
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Display the specified resource.
    *
@@ -168,7 +166,7 @@ class PostController extends Controller
     return view('posts.edit', ['post' => $post, 'users' => $users, 'topics' => $topics]);
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Show the form for editing the specified resource.
    *
@@ -180,7 +178,7 @@ class PostController extends Controller
     return view('posts.edit');
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Update the specified resource in storage.
    *
@@ -217,6 +215,13 @@ class PostController extends Controller
     ]);
 
     if ($validator->fails()) {
+      // ------------------------------
+      // alerts
+      Session::flash('alert-message', 'Error occured. Please fill correctly all required fields!');
+      Session::flash('alert-class', 'alert-danger');
+
+      // ------------------------------
+      // redirect with validation messages
       return redirect('/dashboard/posts/' . $request->postId)
         ->withErrors($validator)
         ->withInput();
@@ -265,15 +270,17 @@ class PostController extends Controller
         "status" => $postStatus,
       ]);
 
-    // Create new alert
+    // ------------------------------
+    // alerts
     Session::flash('alert-message', 'Post updated successfully!');
     Session::flash('alert-class', 'alert-success');
 
-    // Redirect
+    // ------------------------------
+    // redirect
     return redirect('/dashboard/posts');
   }
 
-  // ===============================================================
+  // ================================================
   /**
    * Remove the specified resource from storage.
    *
@@ -305,16 +312,4 @@ class PostController extends Controller
 
     return back();
   }
-
-  // public function showImage($url)
-  // {
-  //   $disk = Storage::disk('s3');
-  //   $path = $disk->url($url);
-  //   return $path;
-  // }
-
-  // public function uploadImage(Request $request)
-  // {
-  //   return 'lol' . '<br>' . $request;
-  // }
 }

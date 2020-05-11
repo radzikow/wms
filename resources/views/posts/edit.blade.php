@@ -106,7 +106,7 @@
 
           {{-- image preview --}}
           <div class="form-item">
-            <img id="editedImagePreview" class="image-preview" src="{{ Storage::disk('s3')->url($post->image_s3_path) }}" alt="Post Image">
+            <img id="editedPostImagePreview" class="image-preview" src="{{ Storage::disk('s3')->url($post->image_s3_path) }}" alt="Post Image">
           </div>
 
           {{-- author --}}

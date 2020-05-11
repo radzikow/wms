@@ -628,6 +628,17 @@
                 &::-webkit-scrollbar-thumb:hover {
                   background: rgba(70, 157, 201, 0.7);
                 }
+
+                .table-image-preview {
+                  display: block;
+                  width: 200px;
+                  min-height: 120px;                  height: auto;
+                  // border: 1px solid $text-2;
+                }
+
+                .table-image-preview[src=""] {
+                  display: none;
+                }
               }
 
               // td options

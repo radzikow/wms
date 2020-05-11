@@ -47,7 +47,9 @@
             <tr>
               <td><img class="td-image" src="{{ url('/svg/square.svg') }}" alt="Select"></td>
               <td>{{ $key + 1 }}</td>
-              <td>{{ $banner->image }}</td>
+
+              <td><img class="table-image-preview" src="{{ Storage::disk('s3')->url($banner->image_s3_path) }}" alt="Banner Image"></td>
+
               <td>{{ $banner->title }}</td>
               <td><span
                   class="status {{ $banner->status == 1 ? 'published' : 'unpublished' }}">{{ $banner->status == 1 ? 'Published' : 'Unpublished' }}</span>

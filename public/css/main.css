@@ -12834,6 +12834,17 @@ a.text-dark:focus {
   background: rgba(70, 157, 201, 0.7);
 }
 
+.main-wrapper .main-content .content .content-tables table tbody tr td .table-image-preview {
+  display: block;
+  width: 200px;
+  min-height: 120px;
+  height: auto;
+}
+
+.main-wrapper .main-content .content .content-tables table tbody tr td .table-image-preview[src=""] {
+  display: none;
+}
+
 .main-wrapper .main-content .content .content-tables table tbody tr .options form {
   display: inline-block;
 }

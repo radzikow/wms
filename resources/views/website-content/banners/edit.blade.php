@@ -80,16 +80,18 @@
 
           {{-- image --}}
           <div class="form-item">
-            <label for="bannerImage">Upload image</label>
+            <label for="bannerImage">Upload image (max 1MB)</label>
             <input class="{{ $errors->has('bannerImage') ? 'has-error' :'' }}" type="file" name="bannerImage"
-              id="bannerImage">
+              id="editedBannerImage">
           </div>
 
-          {{-- old image preview --}}
           <div class="form-item">
-            <label for="bannerPrevImage">Old image preview</label>
-            <img class="image-preview" src="{{ asset('storage/banners_images/'.$banner->image) }}" alt="Banner Image">
-            <input type="hidden" name="bannerPrevImage" value="{{ $banner->image }}">
+            <input id="currentEditedBannerImage" type="hidden" name="currentBannerImage" value="{{ $banner->image_s3_path }}">
+          </div>
+
+          {{-- image preview --}}
+          <div class="form-item">
+            <img id="editedBannerImagePreview" class="image-preview" src="{{ Storage::disk('s3')->url($banner->image_s3_path) }}" alt="Banner Image">
           </div>
 
           {{-- status --}}

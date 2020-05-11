@@ -78,9 +78,15 @@
 
           {{-- image --}}
           <div class="form-item">
-            <label for="bannerImage">Upload image</label>
+            <label for="bannerImage">Upload image (max 1MB)</label>
             <input class="{{ $errors->has('bannerImage') ? 'has-error' :'' }}" type="file" name="bannerImage"
-              id="bannerImage">
+              id="uploadedBannerImage">
+          </div>
+
+          {{-- image preview --}}
+          <div class="form-item">
+            <label>Image preview</label>
+            <img src="" id="uploadedBannerImagePreview" class="image-preview" alt="Banner Image">
           </div>
 
           {{-- status --}}
