@@ -55,7 +55,7 @@
             <select class="{{ $errors->has('postTopic') ? 'has-error' :'' }}" name="postTopic" id="postTopic">
               <option value="" selected disabled hidden>Choose topic</option>
               @foreach($topics as $topic)
-              <option value="{{ $topic->id }}" {{ old('postTopic') === $topic->name ? 'selected' :'' }}>
+              <option value="{{ $topic->id }}" {{ old('postTopic') == $topic->name ? 'selected' : '' }}>
                 {{ $topic->name }}</option>
               @endforeach
             </select>
@@ -91,7 +91,7 @@
           {{-- image --}}
           <div class="form-item">
             <label for="postImage">Upload image (max 1MB)</label>
-            <input class="{{ $errors->has('postImage') ? 'has-error' :'' }}" type="file" name="uploadedPostImage"
+            <input class="{{ $errors->has('postImage') ? 'has-error' :'' }}" type="file" name="postImage"
               id="uploadedPostImage">
           </div>
 

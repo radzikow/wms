@@ -143,6 +143,7 @@
               width: 100%;
               display: block;
               padding: 4px;
+              border: 1px solid $text-2;
             }
 
             input {
@@ -155,6 +156,7 @@
 
             input[type="date"] {
               max-width: 200px;
+              border: 1px solid $text-2;
             }
 
             .inputStatus {
@@ -168,6 +170,7 @@
               display: block;
               max-width: 200px;
               height: 34px;
+              border: 1px solid $text-2;
             }
 
             .has-error {
@@ -182,7 +185,13 @@
             .image-preview {
               display: block;
               width: 260px;
+              min-height: 150px;
               height: auto;
+              border: 1px solid $text-2;
+            }
+
+            img[src=""] {
+              display: none;
             }
           }
 

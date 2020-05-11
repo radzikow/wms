@@ -12330,6 +12330,7 @@ a.text-dark:focus {
   width: 100%;
   display: block;
   padding: 4px;
+  border: 1px solid #CBCBCB;
 }
 
 .main-wrapper .main-content .content .content-forms .form .form-item input {
@@ -12342,6 +12343,7 @@ a.text-dark:focus {
 
 .main-wrapper .main-content .content .content-forms .form .form-item input[type=date] {
   max-width: 200px;
+  border: 1px solid #CBCBCB;
 }
 
 .main-wrapper .main-content .content .content-forms .form .form-item .inputStatus {
@@ -12357,6 +12359,7 @@ a.text-dark:focus {
   display: block;
   max-width: 200px;
   height: 34px;
+  border: 1px solid #CBCBCB;
 }
 
 .main-wrapper .main-content .content .content-forms .form .form-item .has-error {
@@ -12371,7 +12374,13 @@ a.text-dark:focus {
 .main-wrapper .main-content .content .content-forms .form .form-item .image-preview {
   display: block;
   width: 260px;
+  min-height: 150px;
   height: auto;
+  border: 1px solid #CBCBCB;
+}
+
+.main-wrapper .main-content .content .content-forms .form .form-item img[src=""] {
+  display: none;
 }
 
 .main-wrapper .main-content .content .content-forms .form .form-status {

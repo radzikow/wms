@@ -96,8 +96,8 @@
 
           {{-- image --}}
           <div class="form-item">
-            <label for="editedPostImage">Upload image (max 1MB)</label>
-            <input type="file" name="editedPostImage" id="editedPostImage">
+            <label for="postImage">Upload image (max 1MB)</label>
+            <input type="file" name="postImage" id="editedPostImage">
           </div>
 
           <div class="form-item">

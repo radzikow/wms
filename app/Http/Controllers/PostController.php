@@ -224,9 +224,9 @@ class PostController extends Controller
 
     // ------------------------------
     // image upload
-    if ($request->hasFile('editedPostImage')) {
+    if ($request->hasFile('postImage')) {
 
-      $image = $request->file('editedPostImage');
+      $image = $request->file('postImage');
 
       // save new image to server (public)
       $imageExtension = $image->getClientOriginalExtension();
