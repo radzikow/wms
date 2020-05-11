@@ -29,16 +29,13 @@ main {
 @import "app";
 
 // App Header Page
-@import "app-header";
+@import "header";
 
 // Sidebar Page
 @import "sidebar";
 
-// Dashboard Page
+// Dashboard
 @import "dashboard";
-
-// Dashboard Content
-@import "dashboard-content";
 
 // Alert
 @import "alert";

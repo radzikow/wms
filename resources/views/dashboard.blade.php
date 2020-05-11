@@ -2,15 +2,17 @@
 
 @section('content')
 
-{{-- Dashboard Section --}}
-<div class="dashboard-section">
+{{-- Dashboard --}}
+
+{{-- Main Wrapper --}}
+<div class="main-wrapper">
 
   {{-- Title --}}
-  <div class="dashboard-title-wrapper">
-    <h1 class="dashboard-title"><a href="{{ url('/dashboard') }}">Dashboard</a></h1>
+  <div class="title-wrapper">
+    <h1 class="title"><a href="{{ url('/dashboard') }}">Dashboard</a></h1>
   </div>
 
-  {{-- Tiles --}}
+  {{-- Dashboard Tiles --}}
   <div class="dashoard-tiles-wrapper">
 
     <div class="dashoard-tile-single">
@@ -55,138 +57,166 @@
 
   </div>
 
-  {{-- Posts --}}
-  <div class="dashboard-posts-wrapper">
+  {{-- Most Popular Posts --}}
 
-    <div class="dashboard-posts-title">
+  {{-- Main Content --}}
+  <div class="main-content">
+
+    {{-- Title --}}
+    <div class="content-title">
       <p>Most popular posts</p>
+      <div class="title-buttons">
+        <a href="{{ url('dashboard/posts/create') }}" class="title-button button-add"><img
+            src="{{ asset('/svg/add.svg') }}" alt="Add"></a>
+      </div>
     </div>
 
-    <div class="dashboard-posts-table">
+    {{-- Content --}}
+    <div class="content">
 
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Views</th>
-            <th>Comments</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($posts as $key => $post)
-          <tr>
-            <td>{{ $key + 1 }}</td>
-            <td>{{ $post->title }}</td>
-            @foreach ($users as $user)
-            @if ($user->id === $post->user_id)
-            <td>{{ $user->firstname . ' ' . $user->lastname }}</td>
-            @endif
+      <div class="content-tables">
+
+        <table>
+          <thead class="dashboard-posts-table-head">
+            <tr>
+              <th>Rank</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Views</th>
+              <th>Comments</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($posts as $key => $post)
+            <tr>
+              <td>{{ $key + 1 }}</td>
+              <td>{{ $post->title }}</td>
+              @foreach ($users as $user)
+              @if ($user->id === $post->user_id)
+              <td>{{ $user->firstname . ' ' . $user->lastname }}</td>
+              @endif
+              @endforeach
+              <td>{{ $post->views }}</td>
+              <td>{{ $post->comments }}</td>
+              <td><span
+                  class="status {{ $post->status == 1 ? 'published' : 'unpublished' }}">{{ $post->status == 1 ? 'Published' : 'Unpublished' }}</span>
+              </td>
+              <td class="options">
+                <a href="/dashboard/posts/{{ $post->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>
+                <form action="/dashboard/posts/{{$post->id}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button id="" onclick="return confirm('Are you sure you want to delete this post?')"><img
+                      src="{{ url('/svg/delete-red.svg') }}" alt="Delete"></button>
+                </form>
+                {{-- TODO: show post btn --}}
+                <a href=""><img src="{{ url('/svg/show.svg') }}" alt="Show"></a>
+              </td>
+            </tr>
             @endforeach
-            <td>{{ $post->views }}</td>
-            <td>{{ $post->comments }}</td>
-            <td><span
-                class="post-status {{ $post->status == 1 ? 'published' : 'unpublished' }}">{{ $post->status == 1 ? 'Published' : 'Unpublished' }}</span>
-            </td>
-            <td class="options">
-              <a href="/dashboard/posts/{{ $post->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>
-              <form action="/dashboard/posts/{{$post->id}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button id="" onclick="return confirm('Are you sure you want to delete this post?')"><img
-                    src="{{ url('/svg/delete-red.svg') }}" alt="Delete"></button>
-              </form>
-              {{-- TODO: show post btn --}}
-              <a href=""><img src="{{ url('/svg/show.svg') }}" alt="Show"></a>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+
+      </div>
+
+      {{-- Show more btn --}}
+      <div class="show-more-btn">
+        <a href="{{ url('/dashboard/posts') }}">
+          See all posts
+          <img src="{{ url('/svg/angle-right.svg') }}" alt="Right">
+        </a>
+      </div>
+
     </div>
 
-    <div class="dashboard-posts-btn">
-      <a href="{{ url('/dashboard/posts') }}">
-        See all posts
-        <img src="{{ url('/svg/angle-right.svg') }}" alt="Right">
-      </a>
-    </div>
   </div>
 
-  {{-- Comments --}}
-  <div class="dashboard-comments-wrapper">
+  {{-- Recently Added Comments --}}
 
-    <div class="dashboard-comments-title">
+  {{-- Main Content --}}
+  <div class="main-content">
+
+    {{-- Title --}}
+    <div class="content-title">
       <p>Recently added comments</p>
+      <div class="title-buttons">
+        <a href="{{ url('dashboard/posts/create') }}" class="title-button button-add"><img
+            src="{{ asset('/svg/add.svg') }}" alt="Add"></a>
+      </div>
     </div>
 
-    <div class="dashboard-comments-table">
+    {{-- Content --}}
+    <div class="content">
 
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Date</th>
-            <th>Nickname</th>
-            <th>Text</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($comments as $key => $comment)
-          <tr>
-            <td>{{ $key + 1 }}</td>
-            <td>{{ date('Y-m-d', strtotime($comment->added_at)) }}</td>
-            <td>{{ $comment->nickname }}</td>
-            <td>{{ $comment->text }}</td>
-            <td>
-              @if ($comment->status == 0)
-              <span class="comment-status rejected">Rejected</span>
-              @elseif($comment->status == 1)
-              <span class="comment-status accepted">Accepted</span>
-              @else
-              <span class="comment-status waiting">Waiting</span>
-              @endif
-            </td>
-            <td class="options">
-              {{-- accept --}}
-              <form action="/dashboard/comments/{{$comment->id}}/accept" method="POST">
-                @csrf
-                @method('PUT')
-                <button><img class="accept" src="{{ url('/svg/accept.svg') }}" alt="Accept"></button>
-              </form>
-              {{-- reject --}}
-              <form action="/dashboard/comments/{{$comment->id}}/reject" method="POST">
-                @csrf
-                @method('PUT')
-                <button><img class="reject" src="{{ url('/svg/reject.svg') }}" alt="Reject"></button>
-              </form>
-              {{-- edit --}}
-              <a href="/dashboard/comments/{{ $comment->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}" alt="Edit"></a>
-              {{-- delete --}}
-              <form action="/comments/{{$comment->id}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button id="" onclick="return confirm('Are you sure you want to delete this comment?')"><img
-                    src="{{ url('/svg/delete-red.svg') }}" alt="Delete"></button>
-              </form>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+      <div class="content-tables">
 
-    </div>
+        <table>
+          <thead class="dashboard-comments-table-head">
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Nickname</th>
+              <th>Text</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($comments as $key => $comment)
+            <tr>
+              <td>{{ $key + 1 }}</td>
+              <td>{{ date('Y-m-d', strtotime($comment->added_at)) }}</td>
+              <td>{{ $comment->nickname }}</td>
+              <td>{{ $comment->text }}</td>
+              <td>
+                @if ($comment->status == 0)
+                <span class="status rejected">Rejected</span>
+                @elseif($comment->status == 1)
+                <span class="status accepted">Accepted</span>
+                @else
+                <span class="status waiting">Waiting</span>
+                @endif
+              </td>
+              <td class="options">
+                {{-- accept --}}
+                <form action="/dashboard/comments/{{$comment->id}}/accept" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <button><img class="accept" src="{{ url('/svg/accept.svg') }}" alt="Accept"></button>
+                </form>
+                {{-- reject --}}
+                <form action="/dashboard/comments/{{$comment->id}}/reject" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <button><img class="reject" src="{{ url('/svg/reject.svg') }}" alt="Reject"></button>
+                </form>
+                {{-- edit --}}
+                <a href="/dashboard/comments/{{ $comment->id }}"><img src="{{ url('/svg/edit-yellow.svg') }}"
+                    alt="Edit"></a>
+                {{-- delete --}}
+                <form action="/comments/{{$comment->id}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button id="" onclick="return confirm('Are you sure you want to delete this comment?')"><img
+                      src="{{ url('/svg/delete-red.svg') }}" alt="Delete"></button>
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
 
-    <div class="dashboard-comments-btn">
-      <a href="{{ url('/dashboard/comments') }}">
-        See all comments
-        <img src="{{ url('/svg/angle-right.svg') }}" alt="Right">
-      </a>
+      </div>
+
+      <div class="show-more-btn">
+        <a href="{{ url('/dashboard/comments') }}">
+          See all comments
+          <img src="{{ url('/svg/angle-right.svg') }}" alt="Right">
+        </a>
+      </div>
+
     </div>
 
   </div>
