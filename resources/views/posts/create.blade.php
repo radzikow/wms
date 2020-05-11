@@ -55,7 +55,7 @@
             <select class="{{ $errors->has('postTopic') ? 'has-error' :'' }}" name="postTopic" id="postTopic">
               <option value="" selected disabled hidden>Choose topic</option>
               @foreach($topics as $topic)
-              <option value="{{ $topic->id }}" {{ old('postTopic') == $topic->name ? 'selected' : '' }}>
+              <option value="{{ $topic->id }}" {{ old('postTopic') == $topic->id ? 'selected' : '' }}>
                 {{ $topic->name }}</option>
               @endforeach
             </select>
@@ -108,7 +108,7 @@
               <option value="" selected disabled hidden>Choose author</option>
               @foreach($users as $user)
               <option value="{{ $user->id }}"
-                {{ old('postAuthor') === $user->firstname . ' ' . $user->lastname ? 'selected' :'' }}>
+                {{ old('postAuthor') == $user->id ? 'selected' :'' }}>
                 {{ $user->firstname . ' ' . $user->lastname }}
               </option>
               @endforeach
