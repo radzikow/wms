@@ -234,32 +234,13 @@ function autoHideAlert() {
 
 if (closeAlertBtn) {
   closeAlertBtn.addEventListener('click', hideAlert);
+  autoHideAlert();
 }
 
 if (alertWrapper) {
   alertWrapper.addEventListener('click', hideAlert);
+  autoHideAlert();
 }
-
-autoHideAlert();
-
-
-// =================================
-// CKEditor
-// =================================
-
-// const updatePolicyBtn = document.getElementById('updatePolicyBtn');
-
-// updatePolicyBtn.addEventListener('click', updatePolicy);
-
-// let policy = 'Here goes a privacy & cookies policy...';
-
-// CKEDITOR.instances.policyContent.setData(policy);
-
-// function updatePolicy() {
-//   policy = CKEDITOR.instances.policyContent.getData();
-//   console.log(policy);
-//   CKEDITOR.instances.policyContent.setData(policy);
-// }
 
 
 // =================================
@@ -402,8 +383,55 @@ $(document).ready(function () {
     readURL(this);
   });
 
-
-
 });
 
 
+// =================================
+// Login form tooltips: copy/change text
+// =================================
+
+const mailBtn = document.getElementById('mailBtn');
+
+if (mailBtn) {
+  mailBtn.addEventListener('click', () => {
+    document.execCommand("copy");
+  });
+
+  mailBtn.addEventListener("copy", (event) => {
+    event.preventDefault();
+    if (event.clipboardData) {
+      event.clipboardData.setData("text/plain", 'admin@mail.com');
+      let mailTooltipText = document.querySelector('.mailTooltipText');
+      mailTooltipText.innerHTML = 'Copied!'
+    }
+  });
+
+  mailBtn.addEventListener('mouseleave', () => {
+    let mailTooltipText = document.querySelector('.mailTooltipText');
+    mailTooltipText.innerHTML = 'Copy'
+  });
+}
+
+// --------------
+
+const passBtn = document.getElementById('passBtn');
+
+if (passBtn) {
+  passBtn.addEventListener('click', () => {
+    document.execCommand("copy");
+  });
+
+  passBtn.addEventListener("copy", function (event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+      event.clipboardData.setData("text/plain", 'pass');
+      let passTooltipText = document.querySelector('.passTooltipText');
+      passTooltipText.innerHTML = 'Copied!'
+    }
+  });
+
+  passBtn.addEventListener('mouseleave', () => {
+    let passTooltipText = document.querySelector('.passTooltipText');
+    passTooltipText.innerHTML = 'Copy'
+  });
+}

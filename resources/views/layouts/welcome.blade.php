@@ -19,8 +19,6 @@
   {{-- Footer Scripts --}}
   @include('layouts.partials.footer-scripts')
 
-  <script>console.log('lol')</script>
-
 </body>
 
 </html>

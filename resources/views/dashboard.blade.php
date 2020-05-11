@@ -210,6 +210,7 @@
 
       </div>
 
+      {{-- Show more btn --}}
       <div class="show-more-btn">
         <a href="{{ url('/dashboard/comments') }}">
           See all comments

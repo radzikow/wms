@@ -12,8 +12,7 @@
     <div class="form-item">
       <label for="email">E-mail address</label>
 
-      <input id="email" type="email" name="email"
-        value="{{ old('email') }}" required autocomplete="email" autofocus>
+      <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
       @error('email')
       <span class="invalid-feedback" role="alert">
@@ -25,8 +24,7 @@
     <div class="form-item">
       <label for="password" class="">Password</label>
 
-      <input id="password" type="password" name="password"
-        required autocomplete="current-password">
+      <input id="password" type="password" name="password" required autocomplete="current-password">
 
       @error('password')
       <span class="invalid-feedback" role="alert">
@@ -36,8 +34,7 @@
     </div>
 
     <div class="form-item check">
-      <input class="" type="checkbox" name="remember" id="remember"
-        {{ old('remember') ? 'checked' : '' }}>
+      <input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
       <label class="form-check-label" for="remember">
         Remember me
@@ -51,7 +48,15 @@
     </div>
 
     <div class="test-login">
-      <p>Login using e-mail: <b>admin@mail.com</b> and password: <b>pass</b></p>
+      <p>
+        Login using e-mail:
+        <span id="mailBtn" class="tooltip">admin@mail.com
+          <span class="tooltiptext mailTooltipText">Copy</span></span>
+        and password:
+        <span id="passBtn" class="tooltip">pass
+          <span class="tooltiptext passTooltipText">Copy</span>
+        </span>
+      </p>
     </div>
 
   </form>

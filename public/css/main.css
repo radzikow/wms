@@ -327,6 +327,77 @@ main {
   color: #585757;
 }
 
+.login-wrapper .login-form .test-login p .tooltip,
+.login-wrapper .register-form .test-login p .tooltip,
+.register-wrapper .login-form .test-login p .tooltip,
+.register-wrapper .register-form .test-login p .tooltip {
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.login-wrapper .login-form .test-login p .tooltip .tooltiptext,
+.login-wrapper .register-form .test-login p .tooltip .tooltiptext,
+.register-wrapper .login-form .test-login p .tooltip .tooltiptext,
+.register-wrapper .register-form .test-login p .tooltip .tooltiptext {
+  visibility: hidden;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #585757;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 13px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 1em;
+  text-decoration: none;
+  top: -33px;
+  left: 50%;
+  transform: translate(-50%, 0px);
+}
+
+.login-wrapper .login-form .test-login p .tooltip .tooltiptext::after,
+.login-wrapper .register-form .test-login p .tooltip .tooltiptext::after,
+.register-wrapper .login-form .test-login p .tooltip .tooltiptext::after,
+.register-wrapper .register-form .test-login p .tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #585757 transparent transparent transparent;
+}
+
+.login-wrapper .login-form .test-login p .tooltip:hover,
+.login-wrapper .register-form .test-login p .tooltip:hover,
+.register-wrapper .login-form .test-login p .tooltip:hover,
+.register-wrapper .register-form .test-login p .tooltip:hover {
+  color: #469dc9;
+}
+
+.login-wrapper .login-form .test-login p .tooltip:hover .tooltiptext,
+.login-wrapper .register-form .test-login p .tooltip:hover .tooltiptext,
+.register-wrapper .login-form .test-login p .tooltip:hover .tooltiptext,
+.register-wrapper .register-form .test-login p .tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.login-wrapper .login-form .test-login p .tooltip:active,
+.login-wrapper .register-form .test-login p .tooltip:active,
+.register-wrapper .login-form .test-login p .tooltip:active,
+.register-wrapper .register-form .test-login p .tooltip:active {
+  text-decoration: underline;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

@@ -37341,27 +37341,16 @@ function autoHideAlert() {
 
 if (closeAlertBtn) {
   closeAlertBtn.addEventListener('click', hideAlert);
+  autoHideAlert();
 }
 
 if (alertWrapper) {
   alertWrapper.addEventListener('click', hideAlert);
-}
-
-autoHideAlert(); // =================================
-// CKEditor
-// =================================
-// const updatePolicyBtn = document.getElementById('updatePolicyBtn');
-// updatePolicyBtn.addEventListener('click', updatePolicy);
-// let policy = 'Here goes a privacy & cookies policy...';
-// CKEDITOR.instances.policyContent.setData(policy);
-// function updatePolicy() {
-//   policy = CKEDITOR.instances.policyContent.getData();
-//   console.log(policy);
-//   CKEDITOR.instances.policyContent.setData(policy);
-// }
-// =================================
+  autoHideAlert();
+} // =================================
 // Update Profile
 // =================================
+
 
 localStorage.setItem('activeTab', 'profileInfo');
 var activeTab = localStorage.getItem('activeTab'); // console.log('Status: ', activeTab);
@@ -37484,7 +37473,52 @@ $(document).ready(function () {
   $("#editedBannerImage").change(function () {
     readURL(this);
   });
-});
+}); // =================================
+// Login form tooltips: copy/change text
+// =================================
+
+var mailBtn = document.getElementById('mailBtn');
+
+if (mailBtn) {
+  mailBtn.addEventListener('click', function () {
+    document.execCommand("copy");
+  });
+  mailBtn.addEventListener("copy", function (event) {
+    event.preventDefault();
+
+    if (event.clipboardData) {
+      event.clipboardData.setData("text/plain", 'admin@mail.com');
+      var mailTooltipText = document.querySelector('.mailTooltipText');
+      mailTooltipText.innerHTML = 'Copied!';
+    }
+  });
+  mailBtn.addEventListener('mouseleave', function () {
+    var mailTooltipText = document.querySelector('.mailTooltipText');
+    mailTooltipText.innerHTML = 'Copy';
+  });
+} // --------------
+
+
+var passBtn = document.getElementById('passBtn');
+
+if (passBtn) {
+  passBtn.addEventListener('click', function () {
+    document.execCommand("copy");
+  });
+  passBtn.addEventListener("copy", function (event) {
+    event.preventDefault();
+
+    if (event.clipboardData) {
+      event.clipboardData.setData("text/plain", 'pass');
+      var passTooltipText = document.querySelector('.passTooltipText');
+      passTooltipText.innerHTML = 'Copied!';
+    }
+  });
+  passBtn.addEventListener('mouseleave', function () {
+    var passTooltipText = document.querySelector('.passTooltipText');
+    passTooltipText.innerHTML = 'Copy';
+  });
+}
 
 /***/ }),
 
