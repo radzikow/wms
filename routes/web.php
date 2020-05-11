@@ -68,6 +68,7 @@ Route::get('/dashboard/posts', 'PostController@index');
 Route::get('/dashboard/posts/create', 'PostController@create');
 Route::get('/dashboard/posts/{id}', 'PostController@show');
 Route::post('/dashboard/posts', 'PostController@store');
+Route::post('/dashboard/posts/upload-image', 'PostController@uploadImage');
 Route::put('/dashboard/posts', 'PostController@update');
 Route::delete('/dashboard/posts/{id}', 'PostController@destroy');
 

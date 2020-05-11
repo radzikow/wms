@@ -224,9 +224,9 @@ class PostController extends Controller
 
     // ------------------------------
     // image upload
-    if ($request->hasFile('postImage')) {
+    if ($request->hasFile('editedPostImage')) {
 
-      $image = $request->file('postImage');
+      $image = $request->file('editedPostImage');
 
       // save new image to server (public)
       $imageExtension = $image->getClientOriginalExtension();
@@ -235,19 +235,19 @@ class PostController extends Controller
       $public_path = $image->storeAs($public_destination, $newImageName);
 
       // delete previous image from server (public)
-      Storage::delete($post->image);
+      Storage::delete($post->image_public_path);
 
       // save new image to aws s3
       $s3_destination = 'wms-template/images/blog';
       $s3_path = Storage::disk('s3')->put($s3_destination, $image, 'public');
 
       // delete previous image from aws 3s
-      Storage::disk('s3')->delete($post->image);
+      Storage::disk('s3')->delete($post->image_s3_path);
 
       DB::table('posts')
         ->where('id', $request->postId)
         ->update([
-          "image_storage_path" => $public_path,
+          "image_public_path" => $public_path,
           "image_s3_path" => $s3_path,
         ]);
     }
@@ -262,8 +262,6 @@ class PostController extends Controller
         "tags" => $request->postTags,
         "short_text" => $request->postShort,
         "long_text" => $request->postLong,
-        "image_storage_path" => $public_path,
-        "image_s3_path" => $s3_path,
         "status" => $postStatus,
       ]);
 
@@ -313,5 +311,10 @@ class PostController extends Controller
   //   $disk = Storage::disk('s3');
   //   $path = $disk->url($url);
   //   return $path;
+  // }
+
+  // public function uploadImage(Request $request)
+  // {
+  //   return 'lol' . '<br>' . $request;
   // }
 }

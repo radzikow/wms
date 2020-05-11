@@ -91,8 +91,14 @@
           {{-- image --}}
           <div class="form-item">
             <label for="postImage">Upload image (max 1MB)</label>
-            <input class="{{ $errors->has('postImage') ? 'has-error' :'' }}" type="file" name="postImage"
-              id="postImage">
+            <input class="{{ $errors->has('postImage') ? 'has-error' :'' }}" type="file" name="uploadedPostImage"
+              id="uploadedPostImage">
+          </div>
+
+          {{-- image preview --}}
+          <div class="form-item">
+            <label for="postPrevImage">Image preview</label>
+            <img src="" id="uploadedImagePreview" class="image-preview" alt="Post Image">
           </div>
 
           {{-- author --}}

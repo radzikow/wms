@@ -96,17 +96,17 @@
 
           {{-- image --}}
           <div class="form-item">
-            <label for="postImage">Upload new image (max 1MB)</label>
-            <p class="additional-info">Skip uploading image if you want to use already used one.</p>
-            <input type="file" name="postImage" id="postImage">
+            <label for="editedPostImage">Upload image (max 1MB)</label>
+            <input type="file" name="editedPostImage" id="editedPostImage">
+          </div>
+
+          <div class="form-item">
+            <input id="currentEditedPostImage" type="hidden" name="currentPostImage" value="{{ $post->image_s3_path }}">
           </div>
 
           {{-- image preview --}}
           <div class="form-item">
-            <label for="postPrevImage">Image preview</label>
-            <img class="image-preview" src="{{ Storage::disk('s3')->url($post->image_s3_path) }}" alt="Post Image">
-            {{-- <img class="image-preview" src="{{ showImage($post->image_s3_path) }}" alt="Post Image"> --}}
-            <input type="hidden" name="postPrevImage" value="{{ $post->image_s3_path }}">
+            <img id="editedImagePreview" class="image-preview" src="{{ Storage::disk('s3')->url($post->image_s3_path) }}" alt="Post Image">
           </div>
 
           {{-- author --}}

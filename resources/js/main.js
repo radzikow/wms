@@ -321,3 +321,46 @@ function showProfilePass() {
 function hideProfilePass() {
   updateProfilePass.classList.add('content-hidden');
 }
+
+
+// =================================
+// jQuery code
+// =================================
+
+$(document).ready(function () {
+
+  // =================================
+  // Uploaded post image prev (create blog post)
+  // =================================
+
+  $('#uploadedPostImage').change(function () {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      $('#uploadedImagePreview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  $("#uploadedPostImage").change(function () {
+    readURL(this);
+  });
+
+
+  // =================================
+  // Uploaded post image prev (edit blog post)
+  // =================================
+
+  $('#editedPostImage').change(function () {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      $('#editedImagePreview').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  $("#editedPostImage").change(function () {
+    readURL(this);
+  });
+});
+
+
