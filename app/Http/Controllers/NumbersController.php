@@ -40,7 +40,7 @@ class NumbersController extends Controller
   {
     if (Storage::disk('local')->exists('numbers.json')) {
       // ------------------------------
-      // get json file from storage
+      // get json file from local storage
       $path = Storage::disk('local')->get('numbers.json');
 
       // ------------------------------
@@ -55,7 +55,7 @@ class NumbersController extends Controller
         ]
       ];
 
-      Storage::disk('local')->put('numbers.json', json_encode($data));
+      $path = Storage::disk('local')->put('numbers.json', json_encode($data));
     }
 
     // ------------------------------
@@ -79,8 +79,8 @@ class NumbersController extends Controller
     if ($request && Storage::disk('local')->exists('numbers.json')) {
 
       // ------------------------------
-      // get file path
-      $path = public_path('files/numbers.json');
+      // get json file from local storage
+      $path = Storage::disk('local')->get('numbers.json');
 
       $data = [
         "numbers" => [
@@ -92,9 +92,7 @@ class NumbersController extends Controller
 
       $updated = json_encode($data);
 
-      // ------------------------------
-      // update file content
-      file_put_contents($path, $updated);
+      Storage::disk('local')->put('numbers.json', $updated);
 
       // ------------------------------
       // create file numbers.json if it doesn't exist
@@ -108,7 +106,9 @@ class NumbersController extends Controller
         ]
       ];
 
-      Storage::disk('local')->put('numbers.json', json_encode($data));
+      $updated = json_encode($data);
+
+      Storage::disk('local')->put('numbers.json', $updated);
     }
 
     // ------------------------------

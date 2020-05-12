@@ -81,7 +81,7 @@ class ContactController extends Controller
         ]
       ];
 
-      Storage::disk('local')->put('contact.json', json_encode($data));
+      $path = Storage::disk('local')->put('contact.json', json_encode($data));
     }
 
 
@@ -106,8 +106,6 @@ class ContactController extends Controller
   {
     if ($request && Storage::exists('contact.json')) {
 
-      $path = public_path('files/contact.json');
-
       $data = [
         "contact" => [
           "company_name" => $request->companyName,
@@ -131,7 +129,7 @@ class ContactController extends Controller
 
       $updated = json_encode($data);
 
-      file_put_contents($path, $updated);
+      Storage::disk('local')->put('contact.txt', $updated);
 
       // ------------------------------
       // create file contact.json if it doesn't exist
@@ -158,7 +156,9 @@ class ContactController extends Controller
         ]
       ];
 
-      Storage::disk('local')->put('contact.json', json_encode($data));
+      $updated = json_encode($data);
+
+      Storage::disk('local')->put('contact.json', $updated);
     }
 
     // ------------------------------

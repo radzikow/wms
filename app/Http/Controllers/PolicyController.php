@@ -34,8 +34,7 @@ class PolicyController extends Controller
       // get file
       $policy = Storage::disk('local')->get('policy.txt');
     } else if (!Storage::disk('local')->exists('policy.txt')) {
-      // $path = Storage::disk('local');
-      Storage::disk('local')->put('policy.txt', 'no policy');
+      $policy = Storage::disk('local')->put('policy.txt', 'no policy');
     }
 
     return view('website-content.policy.index', ['policy' => $policy]);
