@@ -23,8 +23,8 @@ class CreatePostsTable extends Migration
       $table->string('tags');
       $table->text('short_text');
       $table->text('long_text');
-      $table->string('image_public_path');
-      $table->string('image_s3_path');
+      $table->string('image_public_path')->nullable();
+      $table->string('image_s3_path')->nullable();
       $table->integer('status')->default(1);
       $table->integer('views')->default(0);
       $table->integer('comments')->default(0);
