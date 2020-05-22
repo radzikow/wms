@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
       $table->text('long_text');
       $table->string('image_public_path')->nullable();
       $table->string('image_s3_path')->nullable();
+      $table->string('image_ftp_path')->nullable();
       $table->integer('status')->default(1);
       $table->integer('views')->default(0);
       $table->integer('comments')->default(0);
@@ -48,6 +49,7 @@ class CreatePostsTable extends Migration
         ',
         'image_public_path' => '1488153671.JPG',
         'image_s3_path' => '1488153671.JPG',
+        'image_ftp_path' => '1488153671.JPG',
         'status' => 1,
       ],
       [
@@ -65,6 +67,7 @@ class CreatePostsTable extends Migration
         ',
         'image_public_path' => '1488153671.JPG',
         'image_s3_path' => '1488153671.JPG',
+        'image_ftp_path' => '1488153671.JPG',
         'status' => 0,
       ],
       [
@@ -82,6 +85,7 @@ class CreatePostsTable extends Migration
         ',
         'image_public_path' => '1488153671.JPG',
         'image_s3_path' => '1488153671.JPG',
+        'image_ftp_path' => '1488153671.JPG',
         'status' => 1,
       ]
     ]);

@@ -46,7 +46,6 @@ return [
     'local' => [
       'driver' => 'local',
       'root' => storage_path('app'),
-      // 'root' => public_path('files'),
     ],
 
     'public' => [
@@ -54,6 +53,16 @@ return [
       'root' => storage_path('app/public'),
       'url' => env('APP_URL') . '/storage',
       'visibility' => 'public',
+      'permissions' => [
+        'file' => [
+          'public' => 0664,
+          // 'private' => 0600,
+        ],
+        'dir' => [
+          'public' => 0775,
+          // 'private' => 0700,
+        ]
+      ]
     ],
 
     's3' => [
@@ -63,8 +72,14 @@ return [
       'region' => env('AWS_DEFAULT_REGION'),
       'bucket' => env('AWS_BUCKET'),
       'endpoint' => env('AWS_URL'),
-      // 'visibility' => 'public',
-      // 'url' => env('AWS_URL') . '/wms-template',
+    ],
+
+    'ftp' => [
+      'driver' => 'ftp',
+      'host' => env('FTP_HOST'),
+      'username' => env('FTP_USERNAME'),
+      'password' => env('FTP_PASSWORD'),
+      'root' => env('FTP_ROOT_PATH'),
     ],
 
   ],

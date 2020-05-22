@@ -101,12 +101,15 @@
           </div>
 
           <div class="form-item">
-            <input id="currentEditedPostImage" type="hidden" name="currentPostImage" value="{{ $post->image_s3_path }}">
+            <input id="currentEditedPostImage" type="hidden" name="currentPostImage"
+              value="{{ $post->image_public_path }}">
           </div>
 
           {{-- image preview --}}
           <div class="form-item">
-            <img id="editedPostImagePreview" class="image-preview" src="{{ Storage::disk('s3')->url($post->image_s3_path) }}" alt="Post Image">
+            <label>Image preview</label>
+            <img id="editedPostImagePreview" class="image-preview"
+              src="{{ Storage::disk('public')->url($post->image_public_path) }}" alt="Post Image">
           </div>
 
           {{-- author --}}

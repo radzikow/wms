@@ -188,4 +188,5 @@ Route::get('/clear-config', function () {
 // Create Symlink
 Route::get('/symlink', function () {
   Artisan::call('storage:link');
+  echo "Done";
 });
