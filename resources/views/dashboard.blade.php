@@ -12,7 +12,7 @@
     <h1 class="title"><a href="{{ url('/dashboard') }}">Dashboard</a></h1>
   </div>
 
-  {{-- Dashboard Tiles --}}
+  {{-- Dashboard Tiles (Analytics) --}}
   <div class="dashoard-tiles-wrapper">
 
     <div class="dashoard-tile-single">
@@ -21,7 +21,7 @@
       </div>
       <div class="tile-right">
         <p>ACTIVE VISITORS</p>
-        <span>16</span>
+        <span>{{ $live_users }}</span>
       </div>
     </div>
 
@@ -30,8 +30,8 @@
         <img src="{{ url('/svg/new-visitors.svg') }}" alt="New Visitors">
       </div>
       <div class="tile-right">
-        <p>NEW VISITORS</p>
-        <span>8</span>
+        <p>VIEWS (TODAY)</p>
+        <span>{{ $visitorsToday[0]['pageViews'] }}</span>
       </div>
     </div>
 
@@ -40,8 +40,8 @@
         <img src="{{ url('/svg/new-posts.svg') }}" alt="New Posts">
       </div>
       <div class="tile-right">
-        <p>NEW POSTS</p>
-        <span>84</span>
+        <p>VIEWS (LAST WEEK)</p>
+        <span>36</span>
       </div>
     </div>
 
@@ -51,7 +51,7 @@
       </div>
       <div class="tile-right">
         <p>NEW COMMENTS</p>
-        <span>65</span>
+        <span>{{ $commentsThisWeek }}</span>
       </div>
     </div>
 
